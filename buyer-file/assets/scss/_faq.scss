@@ -1,0 +1,441 @@
+.faq-left-content {
+    .faq-text {
+        margin-top: 15px;
+    }
+
+    .question-box {
+        background-color: $theme-color;
+        border-radius: 30px;
+        padding: 20px;
+        @include flex;
+        gap: 40px;
+        margin-top: 30px;
+        position: relative;
+        z-index: 9;
+
+        .bg-white-shape {
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .thumb {
+           img {
+                @include imgw;
+                border-radius: 20px;
+           }
+        }
+
+        .content {
+            .title {
+                font-size: 24px;
+                font-weight: 600;
+                color: $white;
+            }
+
+            p {
+                color: $white;
+            }
+
+            .theme-btn {
+                background-color: transparent;
+                border: 1px solid $white;
+                margin-top: 20px;
+
+                &::before {
+                    background-color: $header-color;
+                }
+
+                &:hover {
+                    border-color: $header-color;
+                }
+            }
+        }
+    }
+
+    .respons-box {
+        background-color: $white;
+        padding: 30px;
+        border: 1px dashed #D8DDE1;
+        border-radius: 20px;
+        margin-top: 25px;
+
+        .title-3 {
+            font-size: 24px;
+            font-weight: 600;
+            font-family: $heading-font;
+            color: $header-color;
+
+            i {
+                margin-right: 5px;
+            }
+        }
+
+        .respons-text {
+            margin-top: 10px;
+        }
+    }
+}
+
+.faq-section {
+    position: relative;
+    z-index: 9;
+
+    .faq-bg-shape {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.faq-content-3 {
+    .faq-text {
+        margin-top: 20px;
+    }
+
+     .accordion-box {
+        position: relative;
+        margin-top: 50px;
+
+         @include breakpoint (max-lg){
+           margin-top: 30px;
+         }
+
+        .block {
+            position: relative;
+            margin-bottom: 24px;
+            line-height: 1;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .icon {
+                max-width: 60px;
+                height: 60px;
+                line-height: 60px;
+                text-align: center;
+                background: rgba(225, 0, 6, 0.2);
+                border-radius: 50%;
+                width: 100%;
+                position: relative;
+                z-index: 1;
+
+                &::after {
+                    position: absolute;
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 50%;
+                    content: "";
+                    transform: translate(-50%,-50%);
+                    background-color: $theme-color-3;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all .4s ease-in-out;
+                    z-index: -1;
+                }
+
+                img {
+                     filter: brightness(0);
+                }
+            }
+
+            .acc-btn {
+                position: relative;
+                font-size: 24px;
+                color: #535353;
+                font-weight: 700;
+                font-family: $heading-font;
+                cursor: pointer;
+                transition: all 500ms ease;
+                text-transform: capitalize;
+
+               
+
+                @include breakpoint (max-xxs){
+                    font-size: 18px;
+                    line-height: 1.4;
+                }
+
+                .icon {
+                   
+
+                    &:before{
+                        display: none;
+                    }
+                }
+            }
+
+            .acc-content {
+                position: relative;
+                display: none;
+                margin-top: 14px;
+
+                @include breakpoint (max-xxs){
+                    margin-top: 10px;
+                }
+
+                .text {
+                    color:#535353;
+                    line-height: 26px;
+                    max-width: 560px;
+                }
+            }
+        }
+    }
+
+    .accordion-box .block .acc-content.current {
+        display: block;
+    }
+
+    .accordion-box .block .acc-btn.active .icon:before {
+        content: "\f068"; // minus icon
+    }
+
+    .accordion-box .block:last-child {
+        margin-bottom: 0;
+    }
+
+    .active-block {
+        align-items: start !important;
+
+        .acc-btn {
+            color: $header-color !important;
+        }
+
+        .icon {
+            img {
+                filter: none !important;
+            }
+
+            &::after {
+                opacity: 1 !important;
+                visibility: visible !important;
+                
+            }
+        }
+
+        .icon:before {
+          display: none;
+        }
+    }
+}
+
+.faq-thumb-3 {
+    margin-right: -140px;
+    margin-left: 80px;
+    position: relative;
+    height: 655px;
+
+    @include breakpoint (max-xxxl){
+        margin-left: 50px;
+        margin-right: -100px;
+    }
+
+    @include breakpoint (max-xxl){
+        margin-left: 50px;
+        margin-right: -50px;
+    }
+
+    @include breakpoint (max-xl){
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    @include breakpoint (max-lg){
+        height: 500px;
+    }
+
+    @include breakpoint (max-sm){
+        height: 400px;
+    }
+
+    img {
+        @include imgw;
+        border-radius: 30px;
+        object-fit: cover;
+    }
+
+    .faq-sm-client {
+        background-color: $header-color;
+        display: inline-block;
+        border-radius: 30px;
+        padding: 30px;
+        max-width: 305px;
+        position: absolute;
+        bottom: 0;
+        left: -60px;
+
+         @include breakpoint (max-xl){
+            display: none;
+         }
+
+        .client-img {
+            img {
+                width: initial;
+                height: initial;
+            }
+        }
+
+        .title-2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: $white;
+            margin-top: 15px;
+        }
+
+        .counter-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: $white;
+            margin-top: 80px;
+        }
+        
+        p {
+            font-size: 18px;
+            font-weight: 700;
+            color: $white;
+            font-family: $heading-font;
+            margin-top: 5px;
+        }
+    }
+}
+
+.faq-items {
+    background-color: $white;
+    border-radius: 30px;
+    padding: 26px 24px;
+    margin-left: 30px;
+
+    @include breakpoint (max-xl){
+        margin-left: 0;
+    }
+
+    .accordion-box {
+        position: relative;
+
+        .block {
+            position: relative;
+            margin-bottom: 24px;
+            line-height: 1;
+            border-radius: 0;
+            background: #ECF0F1;
+            border-radius: 10px;
+            padding: 25px 20px;
+
+            .acc-btn {
+                position: relative;
+                font-size: 16px;
+                color: $header-color;
+                font-weight: 600;
+                font-family: $heading-font;
+                cursor: pointer;
+                transition: all 500ms ease;
+                text-transform: capitalize;
+                padding-left: 35px;
+
+                @include breakpoint (max-xxl){
+                    padding-right: 40px;
+                    line-height: 1.4;
+                    font-size: 20px;
+                }
+
+                @include breakpoint (max-xxs){
+                    font-size: 18px;
+                }
+
+                .icon {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    font-size: 16px;
+                    transition: all 500ms ease;
+                    border-radius: 50%;
+                    color: $header-color;
+                    text-align: center;
+
+                    &:before{
+                        display: none;
+                    }
+                }
+
+                .icon2 {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    font-size: 16px;
+                    transition: all 500ms ease;
+                    border-radius: 50%;
+                    color: $header-color;
+                    text-align: center;
+                    display: none;
+
+                    &:before{
+                        display: none;
+                    }
+                }
+            }
+
+            .acc-content {
+                position: relative;
+                display: none;
+                margin-top: 22px;
+
+                @include breakpoint (max-xxs){
+                    margin-top: 10px;
+                }
+
+                .text {
+                    color: $white;
+                    line-height: 26px;
+                }
+            }
+        }
+    }
+
+    .accordion-box .block .acc-content.current {
+        display: block;
+    }
+
+    .accordion-box .block .acc-btn.active .icon:before {
+        content: "\f068"; // minus icon
+    }
+
+    .accordion-box .block:last-child {
+        margin-bottom: 0;
+    }
+
+    .active-block {
+        background-color: #3655FF !important;
+
+        .acc-btn {
+            color: $white !important;
+        }
+
+        .text {
+            color: $white;
+        }
+
+        .icon {
+            display: none;
+        }
+
+        .icon2 {
+            display: block !important;
+        }
+
+        .icon:before {
+            content: "\f068";
+            color: $header-color;
+        }
+    }
+}

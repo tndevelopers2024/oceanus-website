@@ -1,0 +1,43 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("../font/flaticon.woff2?3bc48e4b576f559ee389db0a1674c941") format("woff2"),
+url("../font/flaticon.woff?3bc48e4b576f559ee389db0a1674c941") format("woff"),
+url("../font/flaticon.eot?3bc48e4b576f559ee389db0a1674c941#iefix") format("embedded-opentype"),
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before, span[class^="flaticon-"]:before, span[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-gym:before {
+    content: "\f101";
+}
+.flaticon-weight-loss:before {
+    content: "\f102";
+}
+.flaticon-diet:before {
+    content: "\f103";
+}
+.flaticon-meditation:before {
+    content: "\f104";
+}
+.flaticon-weightlifting:before {
+    content: "\f105";
+}
+.flaticon-dumbbells:before {
+    content: "\f106";
+}
+.flaticon-stationary-bike:before {
+    content: "\f107";
+}
+.flaticon-customer-support:before {
+    content: "\f108";
+}
+
