@@ -1511,9 +1511,13 @@ span {
   max-width: 1680px;
 }
 .header-1 .header-right {
-  padding: 10px 0;
-  background: transparent;
-  backdrop-filter: none;
+  background: rgba(201, 201, 201, 0.21);
+  border-radius: 6px;
+  border-radius: 10px;
+  padding: 10px 40px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 50px;
 }
 @media (max-width: 1199px) {
   .header-1 .header-right {
@@ -1527,8 +1531,9 @@ span {
   }
 }
 .header-1 .header-sidebar-info {
-  background: transparent;
-  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 10px 10px;
   display: flex;
   align-items: center;
   gap: 14px;
