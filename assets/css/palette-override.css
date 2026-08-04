@@ -1,0 +1,704 @@
+/* ================================================================
+   Oceanus Palette Override — Home Page Only
+   Colors from Palette.txt applied as a UI/UX-driven system
+   
+   Primary:     #0077B6  (ocean teal)
+   Accent:      #00B4D8  (deep teal)
+   Dark:        #03045E  (dark slate)
+   Medium:      #0096C7  (soft teal)
+   Muted:       #90E0EF  (slate grey)
+   Light BG:    #F8FAFC  (near-white)
+   Tint:        #CAF0F8  (pale teal)
+   Highlight:   #E0FBFC  (ice blue)
+   ================================================================ */
+
+/* ── Root Variable Overrides ── */
+:root {
+  --theme: #0077B6;
+  --theme-2: #00B4D8;
+  --theme-3: #0096C7;
+  --header: #03045E;
+  --text: #5a6e74;
+  --border: #F8FAFC;
+  --bg: #F8FAFC;
+  --bg2: #E0FBFC;
+  --box-shadow: 0px 1px 14px 0px rgba(0, 119, 182, 0.10);
+}
+
+/* ── Hero Gradient Overlay (hardcoded #020E28 override) ── */
+.hero-1::before {
+  background: linear-gradient(89.7deg, #03045E -4.74%, rgba(3, 4, 94, 0) 99.75%);
+}
+
+
+/* ── Preloader ── */
+.preloader {
+  background: #F8FAFC;
+}
+
+.loader {
+  -webkit-text-stroke: 1px #0077B6;
+  background: radial-gradient(1.13em at 50% 1.6em, #0077B6 99%, rgba(0,0,0,0) 101%) calc(50% - 1.6em) 0/3.2em 100% text,
+              radial-gradient(1.13em at 50% -0.8em, rgba(0,0,0,0) 99%, #0077B6 101%) 50% 0.8em/3.2em 100% repeat-x text;
+}
+
+/* ── Mouse Cursor ── */
+.cursor-outer {
+  border-color: #0077B6;
+  background-color: #0077B6;
+}
+
+.cursor-inner {
+  background-color: #0077B6;
+}
+
+.cursor-inner.cursor-hover {
+  background-color: #0077B6;
+  border-color: #0096C7;
+}
+
+/* ── Back to Top ── */
+.back-to-top {
+  background-color: #00B4D8;
+}
+
+.back-to-top:hover {
+  background-color: #03045E;
+}
+
+/* ── Header ── */
+.header-1 .header-sidebar-info .sidebar__toggle {
+  background: #03045E;
+}
+
+.header-1 .header-sidebar-info .sidebar__toggle:hover {
+  background-color: #0077B6;
+}
+
+.header-1 .header-sidebar-info .search-toggler:hover {
+  background-color: #0077B6;
+}
+
+.header-main .main-menu ul li a:hover {
+  color: #0077B6 !important;
+}
+
+.header-main .main-menu ul li .submenu {
+  border-top-color: #0077B6;
+}
+
+.header-main .main-menu ul li .submenu li a::before {
+  background: #0077B6;
+}
+
+.header-main .main-menu ul li .submenu li a:hover {
+  color: #0077B6 !important;
+}
+
+.header-main .main-menu ul li .submenu li:hover > a {
+  color: #0077B6 !important;
+}
+
+.header-main .main-menu ul li .submenu li:hover > a::after {
+  color: #0077B6;
+}
+
+.header-main .main-menu ul li:hover > a {
+  color: #0077B6;
+}
+
+.header-main .main-menu ul li:hover > a::after {
+  color: #0077B6;
+}
+
+/* Sticky header */
+.sticky {
+  background-color: #03045E !important;
+}
+
+/* ── Theme Button ── */
+.theme-btn {
+  background-color: #0077B6;
+}
+
+.theme-btn::before {
+  background-color: #00B4D8;
+}
+
+.theme-btn:hover {
+  color: #fff;
+}
+
+.theme-btn.style-2 {
+  background-color: transparent;
+  border: 2px solid #fff;
+}
+
+.theme-btn.style-2:hover {
+  border-color: #00B4D8;
+}
+
+.theme-btn.style-2::before {
+  background-color: #00B4D8;
+}
+
+/* ── Hero Section ── */
+.hero-section .counter-area {
+  border-color: rgba(0, 119, 182, 0.25);
+}
+
+.hero-section .counter-title {
+  color: #fff;
+}
+
+/* ── Sub-title / Section Labels ── */
+.sub-title {
+  color: #0077B6;
+}
+
+.sec-line {
+  background-color: #0077B6;
+}
+
+/* ── Service Section ── */
+.service-section {
+  background-color: #F8FAFC;
+}
+
+.service-faq-items .accordion-box .accordion .acc-btn {
+  color: #03045E;
+}
+
+.service-faq-items .accordion-box .accordion .acc-btn.active,
+.service-faq-items .accordion-box .accordion.active-block .acc-btn {
+  color: #0077B6;
+}
+
+.service-faq-items .accordion-box .accordion .acc-content .content .link-btn {
+  color: #0077B6;
+}
+
+.service-faq-items .accordion-box .accordion .acc-content .content .link-btn:hover {
+  color: #00B4D8;
+}
+
+.service-faq-items .accordion-box .accordion .acc-content .content .list li::before {
+  color: #0077B6;
+}
+
+.service-content-box-items .service-thumb .text {
+  color: #0077B6;
+}
+
+/* ── About Section ── */
+.about-section {
+  background-color: #fff;
+}
+
+.about-section .section-content .title {
+  color: #03045E;
+}
+
+.about-section .client-info .clinet-content a {
+  color: #0077B6;
+}
+
+.about-section .client-info .clinet-content a:hover {
+  color: #00B4D8;
+}
+
+/* ── Global Logistics Section ── */
+.global-logistics-content .global-text {
+  color: #5a6e74;
+}
+
+.global-logistics-content .title-2 {
+  color: #03045E;
+}
+
+.global-logistics-content .title-3 {
+  color: #0077B6;
+}
+
+
+
+.global-logistics-image .global-title {
+  color: #03045E;
+}
+
+/* ── Feature Counter Section ── */
+.feature-counter-section {
+  background-color: transparent;
+}
+
+.feature-counter-section .feature-counter-items .counter-title {
+  color: #03045E;
+}
+
+.feature-counter-section .feature-counter-items p {
+  color: #0077B6;
+}
+
+/* ── Counter Divider Lines (image tint - from blue to cyan) ── */
+.feature-counter-wrapper .line-thumb img {
+  filter: hue-rotate(-30deg) saturate(1.2) brightness(1.1);
+}
+
+/* ── Checkmark Icons in Specifications (image tint - from orange to cyan) ── */
+.global-list ul li img {
+  filter: hue-rotate(187deg) saturate(1.2) brightness(1.1);
+}
+
+/* ── Footer Link Icons ── */
+.footer-widget-wrapper .footer-widget-area .list-area li a i,
+.footer-widget-wrapper-two .footer-right-items .footer-widget-items .list-area li a i {
+  color: #0077B6 !important;
+}
+
+
+/* ── Project Section (Operational Flow) ── */
+.project-section {
+  background-color: #03045E;
+}
+
+.project-section .project-items-one .content .tag {
+  color: #CAF0F8;
+}
+
+.project-section .project-items-one .hover-content .tag {
+  background-color: #0077B6;
+  color: #fff;
+}
+
+.project-section .project-items-one .hover-content .tag:hover {
+  background-color: #00B4D8;
+}
+
+/* ── CTA Feature Section ── */
+.cta-feature-section {
+  background-color: #0077B6;
+}
+
+.cta-feature-section .cta-feature-area .icon-items .icon {
+  color: #0077B6;
+}
+
+.cta-feature-section .cta-feature-area .icon-items .content span {
+  color: #CAF0F8;
+}
+
+.cta-feature-section .cta-feature-area .icon-items .content p a {
+  color: #fff;
+}
+
+.cta-feature-section .cta-shape img {
+  opacity: 0.15;
+}
+
+/* ── Serving Multiple Section (Cargo Types) ── */
+.serving-multiple-section {
+  background-color: #fff;
+}
+
+.serving-multiple-section .serving-box-items {
+  border-color: #CAF0F8;
+}
+
+.serving-multiple-section .serving-box-items:hover {
+  border-color: #0077B6;
+  background-color: #F8FAFC;
+}
+
+.serving-multiple-section .serving-box-items .title {
+  color: #03045E;
+}
+
+.serving-multiple-section .serving-box-items:hover .title {
+  color: #0077B6;
+}
+
+/* ── Contact Section ── */
+.contact-section .contact-right-content {
+  background-color: #03045E;
+}
+
+.contact-section .contact-right-content .section-title .title {
+  color: #fff;
+}
+
+.contact-section .contact-right-content .section-title .sub-title {
+  color: #CAF0F8;
+}
+
+.contact-section .contact-right-content .contact-text {
+  color: #CAF0F8;
+}
+
+.contact-section .contact-right-content .title-2 {
+  color: #E0FBFC;
+}
+
+.contact-section .contact-right-content .form-clt input {
+  color: #03045E;
+  background-color: #fff;
+  border-color: #E0FBFC;
+}
+
+.contact-section .contact-right-content .form-clt input::placeholder {
+  color: #0077B6;
+}
+
+.contact-section .contact-right-content .shipping-filter .radio-group .radio-item span {
+  color: #CAF0F8;
+}
+
+.contact-section .contact-right-content .shipping-filter .radio-group .radio-circle {
+  border-color: #0096C7;
+}
+
+.contact-section .contact-right-content .shipping-filter .radio-group input:checked + .radio-circle {
+  border-color: #0077B6;
+  background-color: #0077B6;
+}
+
+.contact-section .contact-right-content .pro-items .pro-head .title {
+  color: #E0FBFC;
+}
+
+.contact-section .contact-right-content .pro-items .progress {
+  background-color: rgba(202, 240, 248, 0.25);
+}
+
+.contact-section .contact-right-content .pro-items .progress .progress-value {
+  background-color: #0077B6;
+}
+
+/* ── Client Feedback Section ── */
+.client-feedback-section {
+  background-color: #F8FAFC;
+}
+
+.client-feedback-content .section-title .sub-title {
+  color: #0077B6;
+}
+
+.client-feedback-content .client-feedback-text {
+  color: #5a6e74;
+}
+
+.client-feedback-content .client-info-area .client-content .title-3 {
+  color: #03045E;
+}
+
+.client-feedback-content .title-2 {
+  color: #03045E;
+}
+
+.client-feedback-thumb-items .client-img-1 {
+  background-color: #0077B6;
+}
+
+.client-feedback-thumb-items .client-img-1 .counter-title {
+  color: #fff;
+}
+
+.client-feedback-thumb-items .client-img-1 .text {
+  color: #E0FBFC;
+}
+
+/* ── Shipment Banner Section ── */
+.shipment-banner-section .shipment-banner-wrapper .content h2 {
+  color: #fff;
+}
+
+.shipment-banner-section .shipment-form-wrap .nav-tabs .nav-link {
+  color: #90E0EF;
+}
+
+.shipment-banner-section .shipment-form-wrap .nav-tabs .nav-link.active {
+  color: #0077B6;
+  border-bottom-color: #0077B6;
+}
+
+.shipment-banner-section .shipment-form-wrap .quote-form .input-wrap .label {
+  color: #03045E;
+}
+
+.shipment-banner-section .shipment-form-wrap .quote-form .input-wrap .line {
+  background-color: #CAF0F8;
+}
+
+/* ── FAQ Section ── */
+.faq-section.section-bg {
+  background-color: #F8FAFC;
+}
+
+.faq-section .faq-items .accordion-box .accordion .acc-btn {
+  color: #03045E;
+}
+
+.faq-section .faq-items .accordion-box .accordion .acc-btn.active {
+  color: #0077B6;
+}
+
+.faq-section .faq-items .accordion-box .accordion .acc-content .text {
+  color: #5a6e74;
+}
+
+.faq-section .faq-left-content .question-box .content .title {
+  color: #03045E;
+}
+
+.faq-section .faq-left-content .respons-box .title-3 {
+  color: #0077B6;
+}
+
+.faq-section .faq-left-content .respons-box .title-3 i {
+  color: #0077B6;
+}
+
+.faq-section .faq-left-content .respons-box .respons-text {
+  color: #5a6e74;
+}
+
+/* ── News / Network Section ── */
+.news-section {
+  background-color: #fff;
+}
+
+.news-section .news-card-items .content .title-2 a {
+  color: #03045E;
+}
+
+.news-section .news-card-items .content .title-2 a:hover {
+  color: #0077B6;
+}
+
+.news-section .news-card-items .content .link-btn {
+  color: #0077B6;
+}
+
+.news-section .news-card-items .content .link-btn:hover {
+  color: #00B4D8;
+}
+
+.news-section .news-card-items .content ul li i {
+  color: #0077B6;
+}
+
+/* ── Footer Section ── */
+.footer-section {
+  background-color: #03045E;
+}
+
+.footer-section .footer-top-wrapper .content h2 {
+  color: #fff;
+}
+
+.footer-section .footer-top-wrapper .content h2 a.footer-email-title-link {
+  color: #CAF0F8;
+}
+
+.footer-section .footer-top-wrapper .content h2 a.footer-email-title-link:hover {
+  color: #E0FBFC;
+}
+
+.footer-section .cirle-button {
+  background-color: #0077B6;
+}
+
+.footer-section .cirle-button:hover {
+  background-color: #00B4D8;
+}
+
+.footer-section .footer-line,
+.footer-section .footer-line2 {
+  background-color: rgba(202, 240, 248, 0.2);
+}
+
+.footer-section .footer-contact h2 {
+  color: #F8FAFC;
+}
+
+.footer-section .footer-contact ul li span {
+  color: #CAF0F8;
+}
+
+.footer-section .footer-contact ul li a.number {
+  color: #E0FBFC;
+}
+
+.footer-section .footer-contact ul li a.number:hover {
+  color: #0077B6;
+}
+
+.footer-section .footer-form p {
+  color: #CAF0F8;
+}
+
+.footer-section .footer-form .form-clt input {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #F8FAFC;
+  border-color: rgba(202, 240, 248, 0.25);
+}
+
+.footer-section .footer-form .form-clt input::placeholder {
+  color: #CAF0F8;
+}
+
+.footer-section .footer-form .social-icon a {
+  color: #CAF0F8;
+  border-color: rgba(202, 240, 248, 0.25);
+}
+
+.footer-section .footer-form .social-icon a:hover {
+  color: #fff;
+  background-color: #0077B6;
+  border-color: #0077B6;
+}
+
+.footer-section .footer-widget-area .widget-title {
+  color: #F8FAFC;
+}
+
+.footer-section .footer-widget-area .list-area li a {
+  color: #CAF0F8;
+}
+
+.footer-section .footer-widget-area .list-area li a:hover {
+  color: #fff;
+}
+
+.footer-section .footer-widget-area .list-area li a i {
+  color: #0077B6;
+}
+
+.footer-section .footer-bottom-wrapper p {
+  color: #CAF0F8;
+}
+
+.footer-section .footer-bottom-wrapper .footer-list li a {
+  color: #CAF0F8;
+}
+
+.footer-section .footer-bottom-wrapper .footer-list li a:hover {
+  color: #fff;
+}
+
+/* ── Offcanvas (Mobile Menu) ── */
+.fix-area .offcanvas__info {
+  background-color: #03045E;
+}
+
+.fix-area .offcanvas__content .text {
+  color: #CAF0F8;
+}
+
+.fix-area .off-contact-info .info-title {
+  color: #F8FAFC;
+}
+
+.fix-area .off-contact-info .contact-details .sub-info {
+  color: #0096C7;
+}
+
+.fix-area .off-contact-info .contact-details p,
+.fix-area .off-contact-info .contact-details p a {
+  color: #CAF0F8;
+}
+
+.fix-area .off-contact-info .contact-details p a:hover {
+  color: #0077B6;
+}
+
+.fix-area .social-icon-list .follow-title {
+  color: #CAF0F8;
+}
+
+.fix-area .social-icon-list .social-icon a {
+  color: #CAF0F8;
+  border-color: rgba(202, 240, 248, 0.25);
+}
+
+.fix-area .social-icon-list .social-icon a:hover {
+  color: #fff;
+  background-color: #0077B6;
+  border-color: #0077B6;
+}
+
+/* ── Search Popup ── */
+.search-popup__content .search-popup__form .search-btn {
+  background-color: #0077B6;
+}
+
+.search-popup__content .search-popup__form .search-btn:hover {
+  background-color: #03045E;
+}
+
+/* ── WhatsApp FAB ── */
+.whatsapp-fab {
+  background-color: #0077B6;
+}
+
+.whatsapp-fab:hover {
+  background-color: #00B4D8;
+}
+
+/* ── Selection & Scrollbar Accents ── */
+::selection {
+  background-color: #0077B6;
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: #0077B6;
+  color: #fff;
+}
+
+/* ── Link Buttons (general) ── */
+.link-btn {
+  color: #0077B6;
+}
+
+.link-btn:hover {
+  color: #00B4D8;
+}
+
+/* ── Progress Bars & Accents ── */
+.progress-value {
+  background-color: #0077B6 !important;
+}
+
+/* ── Accordion icon color override ── */
+.acc-btn .icon {
+  color: #0077B6;
+}
+
+.acc-btn.active .icon {
+  color: #00B4D8;
+}
+
+/* ── FAQ Active Block (hardcoded #3655FF override) ── */
+.faq-items .active-block {
+  background-color: #0077B6 !important;
+}
+
+.faq-items .active-block .acc-btn,
+.faq-items .active-block .acc-content .text,
+.faq-section .faq-items .accordion-box .accordion.active-block .acc-content .text {
+  color: #fff !important;
+}
+
+/* ── Contact Radio Buttons (hardcoded #3655FF override) ── */
+.contact-right-content .shipping-filter .radio-group .radio-item .radio-circle::before {
+  background: #0077B6;
+}
+
+.contact-right-content .shipping-filter .radio-group .radio-item input[type=radio]:checked + .radio-circle {
+  border-color: #0077B6;
+}
+
+.contact-right-content .shipping-filter .radio-group .radio-item span {
+  color: #CAF0F8;
+}
+

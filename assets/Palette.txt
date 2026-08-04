@@ -1,0 +1,20 @@
+/* CSS HEX (Deep Ocean & Bright Cyan Palette) */
+--primary: #0077B6;
+--accent: #00B4D8;
+--dark: #03045E;
+--medium: #0096C7;
+--muted: #90E0EF;
+--light-bg: #F8FAFC;
+--tint: #CAF0F8;
+--highlight: #E0FBFC;
+
+/* Original Oceanus Teal Palette for reference:
+--#299bbc: #299bbc;
+--#f5fdfd: #f5fdfd;
+--#405a64: #405a64;
+--#afd7e0: #afd7e0;
+--#849196: #849196;
+--#7ab9c7: #7ab9c7;
+--#4196aa: #4196aa;
+--#dafdff: #dafdff;
+*/
