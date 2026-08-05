@@ -797,3 +797,21 @@
   line-height: 60px;
   transition: all 0.4s ease-in-out;
 }
+
+/* Footer hero: same treatment as .breadcrumb-wrapper above. The branded
+   oceanus/footer-bg.jpg is a bright daylight photo (the template image it
+   replaced was near-black), so white footer text needs the navy wash to
+   stay readable. Content is lifted above the wash. */
+.footer-section .ripple-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(3, 4, 94, 0.88) 0%, rgba(3, 4, 94, 0.82) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.footer-section > .container {
+  position: relative;
+  z-index: 2;
+}
