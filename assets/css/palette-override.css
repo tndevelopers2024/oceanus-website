@@ -801,14 +801,32 @@
 /* Footer hero: same treatment as .breadcrumb-wrapper above. The branded
    oceanus/footer-bg.jpg is a bright daylight photo (the template image it
    replaced was near-black), so white footer text needs the navy wash to
-   stay readable. Content is lifted above the wash. */
+   stay readable. Content is lifted above the wash.
+   The first 100px (the section's own padding-top, before any heading text)
+   fades in from transparent instead of starting at full opacity, so the
+   white section above doesn't hard-cut into a flat navy band while scrolling
+   into view - by the time the heading is visible the wash is at full
+   strength for contrast. */
 .footer-section .ripple-image::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(3, 4, 94, 0.88) 0%, rgba(3, 4, 94, 0.82) 100%);
+  background: linear-gradient(180deg, rgba(3, 4, 94, 0) 0px, rgba(3, 4, 94, 0.88) 100px, rgba(3, 4, 94, 0.82) 100%);
   z-index: 1;
   pointer-events: none;
+}
+
+/* Belt-and-suspenders: main.js's initRipples() hides the <img> as soon as it
+   starts loading and hands rendering to a WebGL canvas (ripple-2.js). If that
+   canvas fails to initialize (no WebGL / no float-texture extension - not
+   uncommon on older GPUs), nothing is left to paint but .footer-section's
+   own flat background-color, so scrolling in shows a solid navy band with no
+   photo behind it. Painting the same photo as a plain CSS background here
+   means it's always there under the canvas, WebGL or not. */
+.footer-section {
+  background-image: url('../img/oceanus/footer-bg.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .footer-section > .container {
