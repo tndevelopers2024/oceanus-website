@@ -15,19 +15,18 @@
         
 
         // Set the recipient email address.
-        // FIXME: Update this to your desired email address.
-        $recipient = "example@example.com";
+        $recipient = "info@oceanuscontainer.com";
 
         // Build the email content.
         $email_content = "Name $name\n";
-        $email_content .= "Email \n$message\n";
+        $email_content .= "Email $email\n";
         $email_content .= "Message \n$message\n";
 
         // Build the email headers.
         $email_headers = "From: $name <$email>";
 
         // Send the email.
-        if (mail($recipient,  $email_content, $email_headers)) {
+        if (mail($recipient, "New Website Enquiry", $email_content, $email_headers)) {
             // Set a 200 (okay) response code.
             http_response_code(200);
             echo "Thank You! Your message has been sent.";

@@ -1,5 +1,5 @@
 /* ================================================================
-   Oceanus Palette Override — Home Page Only
+   Oceanus Palette Override — Home, About & Contact Pages
    Colors from Palette.txt applied as a UI/UX-driven system
    
    Primary:     #0077B6  (ocean teal)
@@ -702,3 +702,57 @@
   color: #CAF0F8;
 }
 
+
+/* ── About / Contact Inner Pages ── */
+
+/* Breadcrumb hero: darken the photo so the white heading stays readable
+   (unlike .hero-1 on the home page, this section has no built-in overlay) */
+.breadcrumb-wrapper {
+  position: relative;
+}
+
+.breadcrumb-wrapper .ripple-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(3, 4, 94, 0.75) 0%, rgba(3, 4, 94, 0.55) 100%);
+  z-index: 1;
+}
+
+/* Recolor orange stock-template line-art (checkmarks, dividers, arrows) to the Oceanus palette */
+.about-list img,
+.about-line img,
+.about-line2 img,
+.protecting-list .arrow-shape img,
+.choose-us-section-in .icon-area .icon img {
+  filter: hue-rotate(187deg) saturate(1.2) brightness(1.1);
+}
+
+/* Core Services icon chips (about.html) */
+.contry-box-items .image i {
+  color: #0077B6;
+}
+
+.contry-box-items:hover .image i {
+  color: #00B4D8;
+}
+
+/* Vision & Mission content card: guarantee text legibility regardless of the
+   adjacent tank photo (which has "Oceanus Line" branding painted on it) */
+.choose-us-section-in .choose-right-content-in {
+  position: relative;
+  z-index: 2;
+  background: #F8FAFC;
+  padding: 32px;
+  border-radius: 16px;
+}
+
+/* ── Sticky Header: keep the frosted-glass pill look on scroll ──
+   (main.css flattens .sticky.header-1 to a solid bar, losing the
+   translucent capsule nav used at the top of the page) */
+.sticky.header-1 {
+  background: rgba(3, 4, 94, 0.92) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(2, 14, 40, 0.25);
+}
