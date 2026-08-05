@@ -1,47 +1,52 @@
  $(function() {
 
-    // Get the form.
-    var form = $('#contact-form');
+    // Handle every AJAX-submitted form on the site (contact + quote).
+    $('#contact-form, #quote-form').each(function() {
 
-    // Get the messages div.
-    var formMessages = $('.form-message');
+        var form = $(this);
 
-    // Set up an event listener for the contact form.
-    $(form).submit(function(e) {
-        // Stop the browser from submitting the form.
-        e.preventDefault();
+        // Each form carries its own message container.
+        var formMessages = form.find('.form-message');
 
-        // Serialize the form data.
-        var formData = $(form).serialize();
+        form.submit(function(e) {
+            // Stop the browser from submitting the form.
+            e.preventDefault();
 
-        // Submit the form using AJAX.
-        $.ajax({
-            type: 'POST',
-            url: $(form).attr('action'),
-            data: formData
-        })
-        .done(function(response) {
-            // Make sure that the formMessages div has the 'success' class.
-            $(formMessages).removeClass('error');
-            $(formMessages).addClass('success');
-
-            // Set the message text.
-            $(formMessages).text(response);
-
-            // Clear the form.
-            $('#contact-form input, #contact-form textarea').val('');
-        })
-        .fail(function(data) {
-            // Make sure that the formMessages div has the 'error' class.
-            $(formMessages).removeClass('success');
-            $(formMessages).addClass('error');
-
-            // Set the message text.
-            if (data.responseText !== '') {
-                $(formMessages).text(data.responseText);
-            } else {
-                $(formMessages).text('Oops! An error occurred and your message could not be sent.');
+            // Let the browser run its own required-field validation first.
+            if (this.checkValidity && !this.checkValidity()) {
+                this.reportValidity();
+                return;
             }
+
+            var submitBtn = form.find('button[type="submit"]');
+            submitBtn.prop('disabled', true);
+
+            // Submit the form using AJAX.
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                data: form.serialize()
+            })
+            .done(function(response) {
+                formMessages.removeClass('error').addClass('success');
+                formMessages.text(response);
+
+                // Clear the form.
+                form.find('input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea').val('');
+                form.find('select').prop('selectedIndex', 0).trigger('change');
+            })
+            .fail(function(data) {
+                formMessages.removeClass('success').addClass('error');
+
+                if (data.responseText !== '') {
+                    formMessages.text(data.responseText);
+                } else {
+                    formMessages.text('Oops! An error occurred and your message could not be sent.');
+                }
+            })
+            .always(function() {
+                submitBtn.prop('disabled', false);
+            });
         });
     });
 

@@ -10,17 +10,19 @@
         $name = strip_tags(trim($_POST["name"]));
         $name = str_replace(array("\r","\n"),array(" "," "),$name);
         $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+        $phone = isset($_POST["phone"]) ? strip_tags(trim($_POST["phone"])) : "";
+        $service = isset($_POST["service"]) ? strip_tags(trim($_POST["service"])) : "";
         $message = trim($_POST["message"]);
-
-        
 
         // Set the recipient email address.
         $recipient = "info@oceanuscontainer.com";
 
         // Build the email content.
-        $email_content = "Name $name\n";
-        $email_content .= "Email $email\n";
-        $email_content .= "Message \n$message\n";
+        $email_content = "Name: $name\n";
+        $email_content .= "Email: $email\n";
+        $email_content .= "Phone: $phone\n";
+        $email_content .= "Service: $service\n";
+        $email_content .= "Message:\n$message\n";
 
         // Build the email headers.
         $email_headers = "From: $name <$email>";

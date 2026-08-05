@@ -756,3 +756,44 @@
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 8px 24px rgba(2, 14, 40, 0.25);
 }
+
+/* ── Form submission feedback (contact + quote AJAX responses) ──
+   ajax-mail.js writes the server response into .form-message; without
+   these rules the response text is invisible to the user. */
+.form-message {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  display: none;
+}
+.form-message.success,
+.form-message.error {
+  display: block;
+}
+.form-message.success {
+  background: #E6F6EF;
+  color: #0B6B45;
+  border: 1px solid #9BD9BF;
+}
+.form-message.error {
+  background: #FDECEC;
+  color: #96231F;
+  border: 1px solid #F1B0AE;
+}
+
+/* Active service in the service-details sidebar list */
+.service-details-wrapper .service-left-sidebar-area ul li.active a {
+  color: var(--theme);
+  font-weight: 700;
+}
+
+/* Service cards use Font Awesome glyphs (ship, tank, globe…) instead of the
+   template's road-freight SVGs, which did not match our service lines. */
+.service-card-items-in .icon i {
+  font-size: 26px;
+  color: #fff;
+  line-height: 60px;
+  transition: all 0.4s ease-in-out;
+}
