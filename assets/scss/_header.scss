@@ -13,9 +13,17 @@
 	position: relative;
 
 	.logo {
+		img {
+			max-height: 80px !important;
+			max-width: 320px !important;
+			width: auto !important;
+			height: auto !important;
+			object-fit: contain;
+		}
 		@include breakpoint (max-sm){
 			img {
-				width: 120px;
+				max-height: 60px !important;
+				max-width: 220px !important;
 			}
 		}
 	}
