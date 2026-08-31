@@ -490,21 +490,30 @@
   color: #0077B6;
 }
 
-/* ── Footer Section ── */
+/* ── Footer Section (Light Theme with Full Color Logo) ── */
 .footer-section {
-  background-color: #03045E;
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  border-top: 1px solid #E2E8F0;
+  box-shadow: 0 -4px 20px rgba(3, 4, 94, 0.04);
+  position: relative;
+  color: #5A6E74;
+}
+
+.footer-section .ripple-image::after {
+  display: none !important;
 }
 
 .footer-section .footer-top-wrapper .content h2 {
-  color: #fff;
+  color: #03045E;
 }
 
 .footer-section .footer-top-wrapper .content h2 a.footer-email-title-link {
-  color: #CAF0F8;
+  color: #0077B6;
 }
 
 .footer-section .footer-top-wrapper .content h2 a.footer-email-title-link:hover {
-  color: #E0FBFC;
+  color: #00B4D8;
 }
 
 .footer-section .cirle-button {
@@ -517,19 +526,20 @@
 
 .footer-section .footer-line,
 .footer-section .footer-line2 {
-  background-color: rgba(202, 240, 248, 0.2);
+  background-color: #E2E8F0 !important;
 }
 
 .footer-section .footer-contact h2 {
-  color: #F8FAFC;
+  color: #03045E;
 }
 
 .footer-section .footer-contact ul li span {
-  color: #CAF0F8;
+  color: #64748B;
 }
 
 .footer-section .footer-contact ul li a.number {
-  color: #E0FBFC;
+  color: #03045E;
+  font-weight: 600;
 }
 
 .footer-section .footer-contact ul li a.number:hover {
@@ -537,22 +547,23 @@
 }
 
 .footer-section .footer-form p {
-  color: #CAF0F8;
+  color: #64748B;
 }
 
 .footer-section .footer-form .form-clt input {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #F8FAFC;
-  border-color: rgba(202, 240, 248, 0.25);
+  background-color: #F8FAFC;
+  color: #03045E;
+  border: 1px solid #CBD5E1;
 }
 
 .footer-section .footer-form .form-clt input::placeholder {
-  color: #CAF0F8;
+  color: #94A3B8;
 }
 
 .footer-section .footer-form .social-icon a {
-  color: #CAF0F8;
-  border-color: rgba(202, 240, 248, 0.25);
+  color: #0077B6;
+  background-color: #F1F5F9;
+  border: 1px solid #E2E8F0;
 }
 
 .footer-section .footer-form .social-icon a:hover {
@@ -562,15 +573,15 @@
 }
 
 .footer-section .footer-widget-area .widget-title {
-  color: #F8FAFC;
+  color: #03045E;
 }
 
 .footer-section .footer-widget-area .list-area li a {
-  color: #CAF0F8;
+  color: #5A6E74;
 }
 
 .footer-section .footer-widget-area .list-area li a:hover {
-  color: #fff;
+  color: #0077B6;
 }
 
 .footer-section .footer-widget-area .list-area li a i {
@@ -578,15 +589,15 @@
 }
 
 .footer-section .footer-bottom-wrapper p {
-  color: #CAF0F8;
+  color: #64748B;
 }
 
 .footer-section .footer-bottom-wrapper .footer-list li a {
-  color: #CAF0F8;
+  color: #64748B;
 }
 
 .footer-section .footer-bottom-wrapper .footer-list li a:hover {
-  color: #fff;
+  color: #0077B6;
 }
 
 /* ── Offcanvas (Mobile Menu) ── */
@@ -802,35 +813,8 @@
   transition: all 0.4s ease-in-out;
 }
 
-/* Footer hero: same treatment as .breadcrumb-wrapper above. The branded
-   oceanus/footer-bg.jpg is a bright daylight photo (the template image it
-   replaced was near-black), so white footer text needs the navy wash to
-   stay readable. Content is lifted above the wash.
-   The first 100px (the section's own padding-top, before any heading text)
-   fades in from transparent instead of starting at full opacity, so the
-   white section above doesn't hard-cut into a flat navy band while scrolling
-   into view - by the time the heading is visible the wash is at full
-   strength for contrast. */
-.footer-section .ripple-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(3, 4, 94, 0) 0px, rgba(3, 4, 94, 0.88) 100px, rgba(3, 4, 94, 0.82) 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Belt-and-suspenders: main.js's initRipples() hides the <img> as soon as it
-   starts loading and hands rendering to a WebGL canvas (ripple-2.js). If that
-   canvas fails to initialize (no WebGL / no float-texture extension - not
-   uncommon on older GPUs), nothing is left to paint but .footer-section's
-   own flat background-color, so scrolling in shows a solid navy band with no
-   photo behind it. Painting the same photo as a plain CSS background here
-   means it's always there under the canvas, WebGL or not. */
 .footer-section {
-  background-image: url('../img/oceanus/footer-bg.jpg');
-  background-size: cover;
-  background-position: center;
+  background-image: none !important;
 }
 
 .footer-section > .container {
@@ -851,9 +835,128 @@
 .details-contact-bg .contact-dec p,
 .details-contact-bg .contact-dec a { color: #FFFFFF !important; }
 
-/* Fix clienteles logo slider layout */
-.brand-slider-2 .brand-image { display: flex; align-items: center; justify-content: center; height: 120px; padding: 15px; }
-.brand-slider-2 .brand-image img { max-width: 100%; max-height: 100%; width: auto !important; height: auto !important; object-fit: contain; }
+/* Enhanced Client Logo Slider Layout */
+.brand-slider-2 {
+  padding: 15px 0;
+}
+.brand-slider-2 .swiper-slide {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-slider-2 .brand-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 125px;
+  padding: 18px 22px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(3, 4, 94, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brand-slider-2 .brand-image:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 119, 182, 0.12);
+  border-color: #00B4D8;
+}
+.brand-slider-2 .brand-image img {
+  max-width: 100%;
+  max-height: 80px;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain;
+  filter: contrast(1.05);
+  transition: all 0.3s ease;
+}
+
+/* ── Tank Specifications Table & Visual Highlight ── */
+.tank-spec-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(3, 4, 94, 0.06);
+  border: 1px solid #E2E8F0;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+.tank-spec-header {
+  background: linear-gradient(135deg, #03045E 0%, #0077B6 100%);
+  color: #ffffff;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tank-spec-header h4 {
+  color: #ffffff !important;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.tank-spec-body {
+  padding: 24px;
+}
+.tank-spec-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+}
+.tank-spec-table th, 
+.tank-spec-table td {
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #EDF2F7;
+  vertical-align: middle;
+}
+.tank-spec-table th {
+  background: #F8FAFC;
+  color: #03045E;
+  font-weight: 600;
+  width: 42%;
+}
+.tank-spec-table td {
+  color: #2D3748;
+  font-weight: 500;
+}
+.tank-spec-table tr:last-child th,
+.tank-spec-table tr:last-child td {
+  border-bottom: none;
+}
+.tank-spec-table tr:hover th,
+.tank-spec-table tr:hover td {
+  background-color: #F0F9FF;
+}
+.tank-spec-visual {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(3, 4, 94, 0.12);
+  margin-bottom: 20px;
+}
+.tank-spec-visual img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+.tank-spec-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
 
 /* Fix hero client avatars size and crop */
 .hero-1 .hero-content .client-info {
