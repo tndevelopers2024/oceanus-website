@@ -11,11 +11,11 @@
         <!-- ======== Page title ============ -->
         <title>Our Network – Oceanus Line &amp; Container Logistics LLC</title>
                 <!--<< Favicon >>-->
-        <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-        <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+        <link rel="shortcut icon" href="assets/img/favicon.ico?v=2" type="image/x-icon">
+        <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg?v=2">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=2">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png?v=2">
         <!--<< Bootstrap min.css >>-->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <!--<< All Min Css >>-->
@@ -32,8 +32,12 @@
         <link rel="stylesheet" href="assets/css/nice-select.min.css">
         <!--<< Main.css >>-->
         <link rel="stylesheet" href="assets/css/main.min.css">
+        <!--<< Leaflet.css (self-hosted, network map) >>-->
+        <link rel="stylesheet" href="assets/css/leaflet.css">
+        <!--<< Network Map.css >>-->
+        <link rel="stylesheet" href="assets/css/network-map.css?v=1">
         <!--<< Oceanus Palette Override >>-->
-        <link rel="stylesheet" href="assets/css/palette-override.min.css?v=4">
+        <link rel="stylesheet" href="assets/css/palette-override.min.css?v=13">
     </head>
     <body>
 
@@ -42,7 +46,7 @@
             <!-- Preloader Start -->
             <div class="preloader">
                 <div class="loader">
-                    <img src="assets/img/logo/logo.png" alt="Oceanus Line Logo" class="preloader-logo">
+                    <img src="assets/img/logo/logo.png" alt="Oceanus Line" class="preloader-logo">
                 </div>
             </div>
 
@@ -146,13 +150,16 @@
                                                     </a>
                                                     <ul class="submenu">
                                                         <li><a href="service.html">Our Services</a></li>
-                                                        <li><a href="service-iso-tank.html">ISO Tank Operator</a></li>
+                                                        <li><a href="service-iso-tank.html">180 ISO Tank Operator</a></li>
                                                         <li><a href="service-nvocc.html">NVOCC</a></li>
                                                         <li><a href="service-agency.html">Agency Representation</a></li>
                                                         <li><a href="service-freight-forwarding.html">Freight Forwarding</a></li>
-                                                        <li><a href="service-supply-chain.html">Supply Chain Services</a></li>
-                                                        <li><a href="service-project-cargo.html">Project Cargo</a></li>
+                                                        <li><a href="service-supply-chain.html">End To End Logistics</a></li>
+                                                        <li><a href="service-project-cargo.html">GAS Logistics Domestic</a></li>
                                                     </ul>
+                                                </li>
+                                                <li class="active">
+                                                    <a href="network.html">Our Network</a>
                                                 </li>
                                                 <li>
                                                     <a href="contact.html">Contact Us</a>
@@ -184,7 +191,7 @@
                     <!-- Breadcrumb Section Start -->
                     <section class="breadcrumb-wrapper fix">
                         <div class="ripple-image ripples position-absolute w-100 h-100 top-0 start-0">
-                            <img src="assets/img/oceanus/network-01.jpg" alt="Oceanus Line ISO tank logistics">
+                            <img src="assets/img/oceanus/shipment-banner.jpg" alt="Oceanus Line global container and ISO tank network">
                         </div>
                         <div class="container">
                             <div class="page-heading">
@@ -222,8 +229,22 @@
                                                     80+ ports across 9 regions, with further expansion as the fleet grows to at least 1,000+ ISO tanks.
                                                 </li>
                                             </ul>
-                                            <div class="service-details-thumb">
-                                                <img src="assets/img/oceanus/network-map.jpg" alt="Oceanus Line global port network">
+                                            <div class="onm-map-wrap">
+                                                <div id="oceanus-network-map" class="onm-map" role="application"
+                                                     aria-label="Interactive map of the Oceanus Line port network">
+                                                    <noscript>
+                                                        <img src="assets/img/oceanus/network-map.jpg" alt="Oceanus Line global port network">
+                                                    </noscript>
+                                                </div>
+                                                <div id="oceanus-network-legend" class="onm-legend"
+                                                     aria-label="Filter the map by region">
+                                                    <button type="button" id="oceanus-network-reset" class="onm-legend-item onm-legend-reset">
+                                                        Reset view
+                                                    </button>
+                                                </div>
+                                                <p class="onm-map-note">
+                                                    Drag to pan and click a pin for the port. Click once on the map to enable zooming with the scroll wheel.
+                                                </p>
                                             </div>
 
                                             <!-- Region 1: Middle East & Upper Gulf -->
@@ -617,42 +638,12 @@
                                                 Services
                                             </div>
                                             <ul class="list-area">
-                                                <li>
-                                                    <a href="service-iso-tank.html">
-                                                        <i class="fa-solid fa-chevrons-right"></i>
-                                                        ISO Tank Operator
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="service-nvocc.html">
-                                                        <i class="fa-solid fa-chevrons-right"></i>
-                                                        NVOCC
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="service-agency.html">
-                                                        <i class="fa-solid fa-chevrons-right"></i>
-                                                        Agency Representation
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="service-freight-forwarding.html">
-                                                        <i class="fa-solid fa-chevrons-right"></i>
-                                                        Freight Forwarding
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="service-supply-chain.html">
-                                                        <i class="fa-solid fa-chevrons-right"></i>
-                                                        Supply Chain Services
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="service-project-cargo.html">
-                                                        <i class="fa-solid fa-chevrons-right"></i>
-                                                        Project Cargo
-                                                    </a>
-                                                </li>
+                                                <li><a href="service-iso-tank.html"><i class="fa-solid fa-chevrons-right"></i> 180 ISO Tank Operator</a></li>
+                                                <li><a href="service-nvocc.html"><i class="fa-solid fa-chevrons-right"></i> NVOCC</a></li>
+                                                <li><a href="service-agency.html"><i class="fa-solid fa-chevrons-right"></i> Agency Representation</a></li>
+                                                <li><a href="service-freight-forwarding.html"><i class="fa-solid fa-chevrons-right"></i> Freight Forwarding</a></li>
+                                                <li><a href="service-supply-chain.html"><i class="fa-solid fa-chevrons-right"></i> End To End Logistics</a></li>
+                                                <li><a href="service-project-cargo.html"><i class="fa-solid fa-chevrons-right"></i> GAS Logistics Domestic</a></li>
                                             </ul>
                                         </div>
                                         <div class="footer-widget-items">
@@ -767,6 +758,10 @@
         <script src="assets/js/wow.min.js"></script>
         <!--<< Main.js >>-->
         <script src="assets/js/main.min.js"></script>
+        <!--<< Leaflet Js (self-hosted, network map) >>-->
+        <script src="assets/js/leaflet.js"></script>
+        <!--<< Network Map Js >>-->
+        <script src="assets/js/network-map.js?v=1"></script>
     </body>
 </html>
 

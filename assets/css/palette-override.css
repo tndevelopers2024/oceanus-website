@@ -25,9 +25,63 @@
   --box-shadow: 0px 1px 14px 0px rgba(0, 119, 182, 0.10);
 }
 
-/* ── Hero Gradient Overlay (hardcoded #020E28 override) ── */
+/* ── Hero Gradient Overlay (White Gradient, Left to Right) ── */
+.hero-1 {
+  position: relative;
+}
+
+/* Full-viewport hero. min-height (not height) so the section still grows on
+   short screens and on mobile, where the counters drop into the flow.
+   svh is the second declaration so browsers that support it ignore the vh
+   value and dodge the mobile URL-bar jump. */
+.hero-1 {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .hero-1::before {
-  background: linear-gradient(89.7deg, #03045E -4.74%, rgba(3, 4, 94, 0) 99.75%);
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0.95) 35%, rgba(255, 255, 255, 0.65) 55%, rgba(255, 255, 255, 0) 75%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  display: block !important;
+}
+
+@media (max-width: 991px) {
+  .hero-1::before {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.94) 55%, rgba(255, 255, 255, 0.86) 100%) !important;
+  }
+}
+
+.hero-1 .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Counters stay absolutely positioned (main.css pins them bottom-right);
+   they only need lifting above the ::before overlay. */
+.hero-1 .counter-area {
+  z-index: 2;
+}
+
+/* Hero type flipped to dark now that the overlay is white */
+.hero-1 .hero-content .title,
+.hero-1 .hero-content .title * {
+  color: #03045E !important;
+  text-shadow: none !important;
+}
+
+.hero-1 .hero-content .hero-text {
+  color: #334155 !important;
+  text-shadow: none !important;
 }
 
 
@@ -36,10 +90,38 @@
   background: #F8FAFC;
 }
 
-.loader {
-  -webkit-text-stroke: 1px #0077B6;
-  background: radial-gradient(1.13em at 50% 1.6em, #0077B6 99%, rgba(0,0,0,0) 101%) calc(50% - 1.6em) 0/3.2em 100% text,
-              radial-gradient(1.13em at 50% -0.8em, rgba(0,0,0,0) 99%, #0077B6 101%) 50% 0.8em/3.2em 100% repeat-x text;
+/* Full logo preloader — no "Oceanus" text loader */
+.preloader .loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  font-size: 0;
+  line-height: 0;
+  -webkit-text-stroke: 0;
+  background: none;
+  animation: none;
+}
+
+.preloader .loader:before {
+  content: none;
+  display: none;
+}
+
+.preloader .preloader-logo {
+  display: block;
+  width: 190px;
+  height: auto;
+  max-width: 62vw;
+  margin: 0 auto;
+  animation: preloaderPulse 1.4s ease-in-out infinite alternate;
+}
+
+@media (max-width: 575px) {
+  .preloader .preloader-logo {
+    width: 150px;
+  }
 }
 
 /* ── Mouse Cursor ── */
@@ -149,6 +231,24 @@
 
 .hero-section .counter-title {
   color: #fff;
+}
+
+/* Home hero counters: a light card reads on both the white gradient (small
+   screens, where the cards sit under the copy) and the dark photo (>1600px,
+   where they sit bottom-right) */
+.hero-1 .counter-area .counter-items {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(3, 4, 94, 0.10);
+  box-shadow: 0 8px 24px rgba(2, 14, 40, 0.10);
+}
+
+.hero-1 .counter-area .counter-items .counter-title {
+  color: #03045E;
+}
+
+.hero-1 .counter-area .counter-items p {
+  color: #334155;
+  border-top-color: rgba(3, 4, 94, 0.15);
 }
 
 /* ── Sub-title / Section Labels ── */
@@ -491,7 +591,9 @@
 }
 
 /* ── Footer Section (Light Theme with Full Color Logo) ── */
-.footer-section {
+.footer-section,
+.footer-section.section-bg {
+  background: #FFFFFF !important;
   background-color: #FFFFFF !important;
   background-image: none !important;
   border-top: 1px solid #E2E8F0;
@@ -500,7 +602,10 @@
   color: #5A6E74;
 }
 
-.footer-section .ripple-image::after {
+.footer-section .ripple-image,
+.footer-section .ripple-image img,
+.footer-section .ripple-image::after,
+.footer-section .ripples {
   display: none !important;
 }
 
@@ -727,11 +832,16 @@
 }
 
 .breadcrumb-wrapper .ripple-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(3, 4, 94, 0.75) 0%, rgba(3, 4, 94, 0.55) 100%);
-  z-index: 1;
+  display: none !important;
+  background: none !important;
+}
+
+.breadcrumb-wrapper .page-heading .breadcrumb-title {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.breadcrumb-wrapper .page-heading .breadcrumb-list li {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Recolor orange stock-template line-art (checkmarks, dividers, arrows) to the Oceanus palette */
@@ -958,53 +1068,25 @@
   backdrop-filter: blur(4px);
 }
 
-/* Oceanus Line logo badge in hero content */
-.hero-1 .hero-content .client-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-top: 28px;
-}
-.hero-1 .hero-content .client-info .thumb {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 22px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
-.hero-1 .hero-content .client-info .thumb:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-.hero-1 .hero-content .client-info .thumb img {
-  width: auto;
-  height: 54px;
-  max-width: 220px;
-  object-fit: contain;
-  display: block;
-}
-@media (max-width: 575px) {
-  .hero-1 .hero-content .client-info .thumb img {
-    height: 44px;
-    max-width: 180px;
+/* Hero counters: keep them on the right, over the photo side of the gradient.
+   Below 1600px the pair stacks so it clears the hero copy instead of
+   colliding with it; below 1200px it drops into flow, still right-aligned. */
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .hero-1 .counter-area {
+    right: 40px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
   }
 }
 
-
-/* Fix hero counter overlap on laptop screens */
-@media (max-width: 1600px) {
+@media (min-width: 992px) and (max-width: 1199px) {
   .hero-1 .counter-area {
     position: relative;
     right: auto;
     bottom: auto;
     margin-top: 50px;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }
 
@@ -1013,4 +1095,116 @@
   text-transform: none !important;
   max-width: 750px;
   line-height: 1.6;
+}
+
+/* ── Inner Header & Submenu Overrides (Remove any orange accents) ── */
+.header-1.header-inner .header-main .main-menu ul li a:hover,
+.header-1.header-inner .header-main .main-menu ul li:hover > a,
+.header-1.header-inner .header-main .main-menu ul li .submenu li a:hover,
+.header-1.header-inner .header-main .main-menu ul li .submenu li:hover > a,
+.header-2 .header-main .main-menu ul li a:hover,
+.header-2 .header-main .main-menu ul li:hover > a,
+.header-3 .header-main .main-menu ul li a:hover,
+.header-3 .header-main .main-menu ul li:hover > a {
+  color: #0077B6 !important;
+}
+
+.header-1.header-inner .header-main .main-menu ul li .submenu,
+.header-2 .header-main .main-menu ul li .submenu,
+.header-3 .header-main .main-menu ul li .submenu {
+  border-top: 4px solid #0077B6 !important;
+}
+
+.header-1.header-inner .header-main .main-menu ul li .submenu li a::before,
+.header-2 .header-main .main-menu ul li .submenu li a::before,
+.header-3 .header-main .main-menu ul li .submenu li a::before {
+  background: #0077B6 !important;
+}
+
+.header-1.header-inner .header-main .main-menu ul li .submenu li.active > a,
+.header-1.header-inner .header-main .main-menu ul li .submenu li a.active {
+  color: #0077B6 !important;
+}
+
+.header-1.header-inner .header-sidebar-info .sidebar__toggle:hover,
+.header-1.header-inner .header-sidebar-info .search-toggler:hover,
+.header-2 .search-toggler:hover,
+.header-3 .search-toggler:hover {
+  background-color: #0077B6 !important;
+  color: #fff !important;
+}
+
+.header-1.header-inner .header-sidebar-info .theme-btn,
+.header-2 .theme-btn,
+.header-3 .theme-btn {
+  background-color: #0077B6 !important;
+}
+
+.header-1.header-inner .header-sidebar-info .theme-btn:hover,
+.header-2 .theme-btn:hover,
+.header-3 .theme-btn:hover {
+  background-color: #00B4D8 !important;
+}
+
+.breadcrumb-wrapper .page-heading .breadcrumb-list li a:hover {
+  color: #00B4D8 !important;
+}
+
+.service-details-wrapper .service-left-sidebar-area ul li a:hover {
+  color: #0077B6 !important;
+}
+
+.service-details-wrapper .service-left-sidebar-area .pdf-box-items .contact-btn {
+  color: #0077B6 !important;
+}
+
+.service-details-wrapper .service-left-sidebar-area .pdf-box-items .contact-btn:hover {
+  color: #03045E !important;
+}
+
+.marquee .text.style-2 {
+  -webkit-text-stroke-color: #0077B6 !important;
+}
+
+.error-wrapper .error h2 {
+  color: #0077B6 !important;
+}
+
+
+/* ── Home Header over the white hero gradient ──
+   .header-1 (index.html only) is transparent and sits on top of the hero.
+   With the overlay now white, the white logo and white nav type would
+   disappear, so the un-scrolled state goes dark; the sticky state keeps the
+   navy bar and flips back to white. */
+.header-1:not(.header-inner):not(.sticky) .header-right {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(3, 4, 94, 0.08);
+  box-shadow: 0 6px 20px rgba(2, 14, 40, 0.08);
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-sidebar-info {
+  background: transparent;
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-main .main-menu > nav > ul > li > a {
+  color: #03045E;
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-main .main-menu > nav > ul > li:hover > a,
+.header-1:not(.header-inner):not(.sticky) .header-main .main-menu > nav > ul > li > a:hover {
+  color: #0077B6;
+}
+
+/* index.html carries the dark logo so it reads on the white gradient;
+   invert it back to white once the navy sticky bar takes over */
+.header-1:not(.header-inner).sticky .header-main .logo img {
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 1199px) {
+  .header-1:not(.header-inner):not(.sticky) .header-right {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
 }

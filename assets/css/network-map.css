@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Oceanus Line – Interactive network map (network.html)
+   Pairs with assets/js/network-map.js. Sits on top of leaflet.css.
+   ========================================================================== */
+
+.onm-map-wrap {
+    margin: 40px 0;
+}
+
+.onm-map {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg2, #E0FBFC);
+    box-shadow: var(--box-shadow, 0 1px 14px 0 rgba(0, 119, 182, 0.10));
+    z-index: 1; /* keep tiles under the sticky header */
+}
+
+@media (max-width: 767px) {
+    .onm-map { height: 380px; }
+}
+
+/* ── Pins ───────────────────────────────────────────────────────────────── */
+.onm-pin-wrap {
+    background: none;
+    border: 0;
+}
+
+.onm-pin {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--pin, #0077B6);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(3, 4, 94, 0.25);
+    transition: transform 0.15s ease;
+}
+
+.onm-pin-wrap:hover .onm-pin {
+    transform: scale(1.35);
+}
+
+.onm-pin--hq {
+    width: 22px;
+    height: 22px;
+    border-width: 3px;
+    box-shadow: 0 0 0 1px rgba(3, 4, 94, 0.35), 0 0 0 8px rgba(0, 180, 216, 0.25);
+}
+
+/* ── Popups ─────────────────────────────────────────────────────────────── */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 6px 24px rgba(3, 4, 94, 0.18);
+}
+
+.leaflet-popup-content {
+    margin: 14px 18px;
+    font-family: inherit;
+}
+
+.onm-popup-region {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 2px 9px;
+    border-radius: 20px;
+    background: var(--pin, #0077B6);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.onm-popup-port {
+    display: block;
+    color: var(--header, #03045E);
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+.onm-popup-country {
+    display: block;
+    margin-top: 2px;
+    color: var(--text, #5a6e74);
+    font-size: 13px;
+}
+
+/* ── Legend / region filter ─────────────────────────────────────────────── */
+.onm-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.onm-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0, 119, 182, 0.20);
+    border-radius: 30px;
+    background: #fff;
+    color: var(--text, #5a6e74);
+    font-size: 13px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.onm-legend-item:hover {
+    border-color: var(--pin, #0077B6);
+    color: var(--header, #03045E);
+}
+
+.onm-legend-item.is-active {
+    border-color: var(--pin, #0077B6);
+    color: var(--header, #03045E);
+}
+
+.onm-legend-item:not(.is-active) {
+    opacity: 0.55;
+}
+
+.onm-legend-item:not(.is-active) .onm-legend-dot {
+    background: transparent;
+}
+
+.onm-legend-dot {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 10px;
+    border-radius: 50%;
+    background: var(--pin, #0077B6);
+    border: 2px solid var(--pin, #0077B6);
+}
+
+.onm-legend-reset {
+    border-style: dashed;
+    border-color: rgba(0, 119, 182, 0.35);
+}
+
+.onm-map-note {
+    margin-top: 12px;
+    color: var(--text, #5a6e74);
+    font-size: 13px;
+}
