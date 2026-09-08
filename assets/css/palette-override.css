@@ -1195,10 +1195,39 @@
   color: #0077B6;
 }
 
-/* index.html carries the dark logo so it reads on the white gradient;
-   invert it back to white once the navy sticky bar takes over */
-.header-1:not(.header-inner).sticky .header-main .logo img {
-  filter: brightness(0) invert(1);
+/* Ensure brand color logo is always shown in true colors (never inverted to white) */
+.header-1.header-inner .header-main .logo,
+.sticky .header-main .logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: #ffffff !important;
+  padding: 6px 18px !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12) !important;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .header-1.header-inner .header-main .logo,
+  .sticky .header-main .logo {
+    padding: 4px 12px !important;
+  }
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-main .logo {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Offcanvas mobile menu logo container */
+.offcanvas__logo a {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: #ffffff !important;
+  padding: 8px 16px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
 }
 
 @media (max-width: 1199px) {
@@ -1208,3 +1237,4 @@
     box-shadow: none;
   }
 }
+
