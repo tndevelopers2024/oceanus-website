@@ -914,6 +914,51 @@
   border-radius: 16px;
 }
 
+.choose-us-section-in .choose-right-content-in .icon-items {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.choose-us-section-in .choose-right-content-in .icon-items:last-child {
+  margin-bottom: 0;
+}
+
+.choose-us-section-in .choose-right-content-in .icon-items .icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
+  background: rgba(0, 119, 182, 0.1);
+  color: #0077B6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.choose-us-section-in .choose-right-content-in .icon-items:hover .icon {
+  background: #0077B6;
+  color: #ffffff;
+}
+
+.choose-us-section-in .choose-right-content-in .icon-items .content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #03045E;
+  margin-bottom: 4px;
+}
+
+.choose-us-section-in .choose-right-content-in .icon-items .content p {
+  font-size: 14.5px;
+  color: #5A6E74;
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* ── Sticky Header: keep the frosted-glass pill look on scroll ──
    (main.css flattens .sticky.header-1 to a solid bar, losing the
    translucent capsule nav used at the top of the page) */
