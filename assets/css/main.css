@@ -11023,24 +11023,25 @@ span {
 }
 .preloader .preloader-logo {
   display: block;
-  width: 190px;
+  width: 280px;
+  max-width: 85vw;
   height: auto;
-  max-width: 62vw;
   margin: 0 auto;
   animation: preloaderPulse 1.4s ease-in-out infinite alternate;
 }
 @media (max-width: 575px) {
   .preloader .preloader-logo {
-    width: 150px;
+    width: 220px;
+    max-width: 80vw;
   }
 }
 @keyframes preloaderPulse {
   0% {
-    transform: scale(0.92);
-    opacity: 0.75;
+    transform: scale(0.97);
+    opacity: 0.85;
   }
   100% {
-    transform: scale(1.05);
+    transform: scale(1.04);
     opacity: 1;
   }
 }

@@ -111,16 +111,28 @@
 
 .preloader .preloader-logo {
   display: block;
-  width: 190px;
+  width: 280px;
+  max-width: 85vw;
   height: auto;
-  max-width: 62vw;
   margin: 0 auto;
   animation: preloaderPulse 1.4s ease-in-out infinite alternate;
 }
 
 @media (max-width: 575px) {
   .preloader .preloader-logo {
-    width: 150px;
+    width: 220px;
+    max-width: 80vw;
+  }
+}
+
+@keyframes preloaderPulse {
+  0% {
+    transform: scale(0.97);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.04);
+    opacity: 1;
   }
 }
 
@@ -651,6 +663,21 @@
   color: #0077B6;
 }
 
+.footer-section .footer-contact ul li a.footer-address {
+  font-size: 15px;
+  line-height: 1.5;
+  display: block;
+}
+
+.footer-section .footer-contact ul li .footer-subsidiary {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  color: #03045E;
+  font-weight: 600;
+}
+
+
 .footer-section .footer-form p {
   color: #64748B;
 }
@@ -1068,15 +1095,33 @@
   backdrop-filter: blur(4px);
 }
 
-/* Hero counters: keep them on the right, over the photo side of the gradient.
-   Below 1600px the pair stacks so it clears the hero copy instead of
-   colliding with it; below 1200px it drops into flow, still right-aligned. */
+/* Hero counters: styled cleanly across viewports for 3 counter cards */
+.hero-1 .counter-area {
+  gap: 20px;
+}
+
+.hero-1 .counter-area .counter-items {
+  padding: 22px 24px;
+  min-width: 200px;
+  max-width: 230px;
+}
+
+.hero-1 .counter-area .counter-items .counter-title {
+  font-size: 52px;
+}
+
+.hero-1 .counter-area .counter-items p {
+  font-size: 15px;
+  line-height: 1.35;
+}
+
 @media (min-width: 1200px) and (max-width: 1600px) {
   .hero-1 .counter-area {
-    right: 40px;
+    right: 30px;
+    bottom: 40px;
+    gap: 15px;
     flex-direction: column;
     align-items: flex-end;
-    gap: 15px;
   }
 }
 
@@ -1085,8 +1130,26 @@
     position: relative;
     right: auto;
     bottom: auto;
-    margin-top: 50px;
-    justify-content: flex-end;
+    margin-top: 40px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-1 .counter-area {
+    margin-top: 35px;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-1 .counter-area .counter-items {
+    max-width: 220px;
+    padding: 18px 20px;
+  }
+  .hero-1 .counter-area .counter-items .counter-title {
+    font-size: 42px;
   }
 }
 
