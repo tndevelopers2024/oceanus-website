@@ -735,6 +735,21 @@
 /* ── Offcanvas (Mobile Menu) ── */
 .fix-area .offcanvas__info {
   background-color: #03045E;
+  position: fixed;
+  right: 0;
+  top: 15px;
+  transform: translateX(calc(100% + 100px)) !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: transform 0.45s ease-in-out, opacity 0.45s ease-in-out, visibility 0.45s ease-in-out !important;
+}
+
+.fix-area .offcanvas__info.info-open {
+  transform: translateX(-15px) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .fix-area .offcanvas__content .text {
