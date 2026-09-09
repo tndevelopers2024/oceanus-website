@@ -213,9 +213,15 @@
   color: #0077B6;
 }
 
-/* Sticky header */
+/* Sticky header - Liquid Glass */
 .sticky {
-  background-color: #03045E !important;
+  top: 0 !important;
+  margin-top: 0 !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 8px 32px 0 rgba(3, 4, 94, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9) !important;
 }
 
 /* ── Theme Button ── */
@@ -690,14 +696,28 @@
   color: #64748B;
 }
 
-.footer-section .footer-form .form-clt input {
-  background-color: #F8FAFC;
+/* main.css styles this input for the original dark navy footer (20%-white fill,
+   no border, white text AND white placeholder). The footer is white now, so the
+   field renders as an invisible 56px box with only the absolutely-positioned
+   Subscribe button showing. The previous override lost on specificity -
+   main.css's chain carries an extra `form` element ((0,3,2) vs (0,3,1)) - so it
+   has to be matched selector-for-selector plus the .footer-section scope. */
+.footer-section .footer-widget-wrapper .footer-form form .form-clt input {
+  background: #F8FAFC;
+  backdrop-filter: none;
   color: #03045E;
   border: 1px solid #CBD5E1;
 }
 
-.footer-section .footer-form .form-clt input::placeholder {
+.footer-section .footer-widget-wrapper .footer-form form .form-clt input::placeholder {
   color: #94A3B8;
+  opacity: 1; /* Firefox dims placeholders by default */
+}
+
+.footer-section .footer-widget-wrapper .footer-form form .form-clt input:focus {
+  border-color: #0077B6;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+  color: #03045E;
 }
 
 .footer-section .footer-form .social-icon a {
@@ -1002,14 +1022,87 @@
   margin: 0;
 }
 
-/* ── Sticky Header: keep the frosted-glass pill look on scroll ──
-   (main.css flattens .sticky.header-1 to a solid bar, losing the
-   translucent capsule nav used at the top of the page) */
+/* ── Header: Flush with top (no gap) in all states ── */
+.header-1,
+.header-1.header-inner {
+  top: 0 !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 1199px) {
+  .header-1,
+  .header-1.header-inner {
+    top: 0 !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* ── Sticky Header: Liquid Glass aesthetic on scroll ──
+   Replaces the solid navy background with a modern frosted liquid glass effect. */
 .sticky.header-1 {
-  background: rgba(3, 4, 94, 0.92) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 24px rgba(2, 14, 40, 0.25);
+  top: 0 !important;
+  margin-top: 0 !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 8px 32px 0 rgba(3, 4, 94, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.sticky .header-right {
+  background: rgba(255, 255, 255, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 4px 20px rgba(3, 4, 94, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.sticky .header-sidebar-info {
+  background: transparent !important;
+}
+
+.sticky .header-main .main-menu > nav > ul > li > a {
+  color: #03045E !important;
+  text-shadow: none !important;
+}
+
+.sticky .header-main .main-menu > nav > ul > li:hover > a,
+.sticky .header-main .main-menu > nav > ul > li > a:hover,
+.sticky .header-main .main-menu > nav > ul > li.active > a {
+  color: #0077B6 !important;
+}
+
+.sticky .header-main .main-menu > nav > ul > li > a i {
+  color: inherit !important;
+}
+
+.sticky .header-main .logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  padding: 6px 30px !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 16px rgba(3, 4, 94, 0.05) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1199px) {
+  .sticky .header-right {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .sticky .header-main .logo {
+    padding: 4px 18px !important;
+  }
 }
 
 /* ── Form submission feedback (contact + quote AJAX responses) ──
@@ -1395,13 +1488,13 @@
   color: #0077B6;
 }
 
-/* Ensure brand color logo is always shown in true colors (never inverted to white) */
+/* Ensure brand color logo is always shown in true colors on dark inner banners */
 .header-1.header-inner .header-main .logo,
 .sticky .header-main .logo {
   display: inline-flex !important;
   align-items: center !important;
   background: #ffffff !important;
-  padding: 6px 18px !important;
+  padding: 6px 30px !important;
   border-radius: 50px !important;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12) !important;
   transition: all 0.3s ease;
@@ -1410,7 +1503,7 @@
 @media (max-width: 767px) {
   .header-1.header-inner .header-main .logo,
   .sticky .header-main .logo {
-    padding: 4px 12px !important;
+    padding: 4px 18px !important;
   }
 }
 
@@ -1449,4 +1542,126 @@
 .service-thumb-1 .clip-animation img {
   height: 100%;
   object-fit: cover;
+}
+
+/* Quote page "Not sure which service you need?" card: white copy sits directly
+   on a bright tank photo. Lay a brand-navy scrim over the background image so
+   the text stays readable. */
+.quote-wrapper .contact-bg-items {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.quote-wrapper .contact-bg-items::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(3, 4, 94, 0.88) 0%, rgba(3, 4, 94, 0.7) 100%);
+}
+
+/* Hero counter cards: equalise the three boxes. main.css centres them on the
+   cross axis and sizes each to its own content, so a one-line label produced a
+   shorter, narrower, vertically offset card. Fix the width, stretch the
+   heights, and reserve two lines for every label. */
+.hero-1 .counter-area {
+  align-items: stretch;
+}
+
+.hero-1 .counter-area .counter-items {
+  width: 230px;
+  min-width: 0;
+  max-width: none;
+}
+
+.hero-1 .counter-area .counter-items p {
+  min-height: 2.7em; /* two lines at line-height 1.35 */
+}
+
+@media (max-width: 991px) {
+  .hero-1 .counter-area .counter-items {
+    width: 210px;
+  }
+}
+
+@media (max-width: 575px) {
+  .hero-1 .counter-area .counter-items {
+    width: 100%;
+  }
+}
+
+
+/* Home "Our Core Services": the accordion column grew to 8 rows, but the left
+   column is fixed height (title + button + a 323px-capped thumb pushed down by
+   a 115px margin), so it ran ~225px short and the truck thumb floated with dead
+   space above and below it. Make the column a flex stack and let the thumb take
+   the leftover height at full column width. XL only - below 1200px main.css
+   centres this column and stacks it, which already works. */
+@media (min-width: 1200px) {
+  .service-content-box-items {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* inline-block button would stretch edge-to-edge once blockified as a flex item */
+  .service-content-box-items .theme-btn {
+    align-self: flex-start;
+  }
+
+  .service-content-box-items .service-thumb {
+    max-width: none;
+    width: 100%;
+    margin-top: 60px;
+    flex: 1 1 auto;
+    min-height: 280px;
+  }
+
+  .service-content-box-items .service-thumb .clip-animation {
+    height: 100%;
+  }
+
+  /* main.css sets width/height 100% with no object-fit, so the 1.33 photo would
+     distort once the box is no longer its natural aspect */
+  .service-content-box-items .service-thumb img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+
+/* About page "Our Core Services" tiles: main.css gives .contry-box-items no
+   height at all, so each card sized to its own label - 1 line (NVOCC), 2 lines,
+   or 3 lines (Project & Specialized Cargo) - and the row bottoms came out
+   ragged. Equalise them: a uniform icon well, a label block that reserves two
+   lines, and a min-height that clears the longest label so every card matches
+   across BOTH wrapped rows (height:100% alone only equalises within one row). */
+.contry-box-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 172px;
+  /* card carries margin-top:30px, so subtract it from the stretched column */
+  height: calc(100% - 30px);
+}
+
+.contry-box-items .image {
+  height: 46px;
+  flex: 0 0 46px;
+}
+
+.contry-box-items span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6em; /* two lines at the 18px/1.3 label size */
+}
+
+@media (max-width: 575px) {
+  .contry-box-items {
+    min-height: 150px;
+  }
 }
