@@ -61,6 +61,14 @@
   }
 }
 
+/* The source art is square, so below 991px the crop turns vertical and slides
+   horizontally; anchor right of centre to keep the tank and its logo in frame. */
+@media (max-width: 991px) {
+  .hero-section.hero-1 {
+    background-position: 62% center;
+  }
+}
+
 .hero-1 .hero-content {
   position: relative;
   z-index: 2;
@@ -873,17 +881,52 @@
   position: relative;
 }
 
+/* Navy scrim over the photo: heaviest at the top so the white header type
+   reads over bright imagery (white tanks, sky), still dark enough mid-section
+   for the page title. Sits above the ripple canvas, below the .container copy
+   (which carries z-index: 1). */
 .breadcrumb-wrapper .ripple-image::after {
-  display: none !important;
-  background: none !important;
+  content: "";
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      rgba(2, 14, 40, 0.82) 0%,
+      rgba(2, 14, 40, 0.62) 35%,
+      rgba(2, 14, 40, 0.55) 65%,
+      rgba(2, 14, 40, 0.68) 100%) !important;
+  pointer-events: none;
 }
 
 .breadcrumb-wrapper .page-heading .breadcrumb-title {
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }
 
-.breadcrumb-wrapper .page-heading .breadcrumb-list li {
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+.breadcrumb-wrapper .page-heading .breadcrumb-list li,
+.breadcrumb-wrapper .page-heading .breadcrumb-list li a {
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+/* Inner-page header sits on that scrim: the stock translucent-white pill made
+   the white nav type disappear over light photos, so tint it navy instead. */
+.header-1.header-inner:not(.sticky) .header-right {
+  background: rgba(2, 14, 40, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.header-1.header-inner:not(.sticky) .header-main .main-menu > nav > ul > li > a {
+  text-shadow: 0 1px 4px rgba(2, 14, 40, 0.45);
+}
+
+@media (max-width: 1199px) {
+  .header-1.header-inner:not(.sticky) .header-right {
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 /* Recolor orange stock-template line-art (checkmarks, dividers, arrows) to the Oceanus palette */
@@ -1026,6 +1069,40 @@
 .service-card-items-in:hover .service-hover-img::after { opacity: 1; }
 
 /* Fix contact background card legibility */
+
+/* ── Photo-backed panels that carry white text ──
+   These sections set a background photo inline but ship no scrim of their own,
+   so white copy lands straight on the image. .details-contact-bg already had
+   one; .about-inner-sec and .pdf-box-items did not, and the brighter Oceanus
+   photography made both unreadable. Same navy treatment, same z-index trick. */
+.about-inner-sec {
+  position: relative;
+  z-index: 1;
+}
+
+.about-inner-sec::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(3, 4, 94, 0.78);
+  z-index: -1;
+}
+
+.pdf-box-items {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.pdf-box-items::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(3, 4, 94, 0.78);
+  z-index: -1;
+  border-radius: inherit;
+}
+
 .details-contact-bg { position: relative; z-index: 1; overflow: hidden; }
 .details-contact-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(3, 4, 94, 0.75); z-index: -1; border-radius: inherit; }
 .details-contact-bg .side-title,
@@ -1361,3 +1438,15 @@
   }
 }
 
+
+/* Home core-services tank image: the .clip-animation grid wrapper collapses to
+   the image's natural height, leaving a gap inside the 570px .service-thumb-1
+   box. Make the wrapper and image fill the box instead. */
+.service-thumb-1 .clip-animation {
+  height: 100%;
+}
+
+.service-thumb-1 .clip-animation img {
+  height: 100%;
+  object-fit: cover;
+}
