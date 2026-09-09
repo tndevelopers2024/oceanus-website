@@ -927,41 +927,25 @@
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
 }
 
-/* ── Page Heroes: White Liquid Glass header pill for all pages ── */
-.header-1 .header-right {
-  background: rgba(255, 255, 255, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
-  box-shadow: 0 8px 32px 0 rgba(3, 4, 94, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+/* Inner-page header sits on that scrim: the stock translucent-white pill made
+   the white nav type disappear over light photos, so tint it navy instead. */
+.header-1.header-inner:not(.sticky) .header-right {
+  background: rgba(2, 14, 40, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-.header-1 .header-main .main-menu > nav > ul > li > a {
-  color: #03045E !important;
-  text-shadow: none !important;
-}
-
-.header-1 .header-main .main-menu > nav > ul > li:hover > a,
-.header-1 .header-main .main-menu > nav > ul > li > a:hover,
-.header-1 .header-main .main-menu > nav > ul > li.active > a {
-  color: #0077B6 !important;
-}
-
-.header-1 .header-main .main-menu > nav > ul > li > a i {
-  color: inherit !important;
-}
-
-.header-1 .header-sidebar-info {
-  background: transparent !important;
+.header-1.header-inner:not(.sticky) .header-main .main-menu > nav > ul > li > a {
+  text-shadow: 0 1px 4px rgba(2, 14, 40, 0.45);
 }
 
 @media (max-width: 1199px) {
-  .header-1 .header-right {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+  .header-1.header-inner:not(.sticky) .header-right {
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -1480,24 +1464,53 @@
 }
 
 
-/* ── Header Brand Logo: White Liquid Glass capsule across all page heroes & sticky ── */
-.header-1 .header-main .logo {
+/* ── Home Header over the white hero gradient ──
+   .header-1 (index.html only) is transparent and sits on top of the hero.
+   With the overlay now white, the white logo and white nav type would
+   disappear, so the un-scrolled state goes dark; the sticky state keeps the
+   navy bar and flips back to white. */
+.header-1:not(.header-inner):not(.sticky) .header-right {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(3, 4, 94, 0.08);
+  box-shadow: 0 6px 20px rgba(2, 14, 40, 0.08);
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-sidebar-info {
+  background: transparent;
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-main .main-menu > nav > ul > li > a {
+  color: #03045E;
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-main .main-menu > nav > ul > li:hover > a,
+.header-1:not(.header-inner):not(.sticky) .header-main .main-menu > nav > ul > li > a:hover {
+  color: #0077B6;
+}
+
+/* Ensure brand color logo is always shown in true colors on dark inner banners */
+.header-1.header-inner .header-main .logo,
+.sticky .header-main .logo {
   display: inline-flex !important;
   align-items: center !important;
-  background: rgba(255, 255, 255, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  background: #ffffff !important;
   padding: 6px 30px !important;
   border-radius: 50px !important;
-  box-shadow: 0 8px 32px 0 rgba(3, 4, 94, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12) !important;
   transition: all 0.3s ease;
 }
 
 @media (max-width: 767px) {
-  .header-1 .header-main .logo {
+  .header-1.header-inner .header-main .logo,
+  .sticky .header-main .logo {
     padding: 4px 18px !important;
   }
+}
+
+.header-1:not(.header-inner):not(.sticky) .header-main .logo {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 /* Offcanvas mobile menu logo container */
