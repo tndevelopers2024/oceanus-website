@@ -1,6 +1,14 @@
 <?php
-    // Handles the "Request A Quote" form on quote.html.
+    // Handles the "Request A Quote" form on quote.html (submitted by assets/js/ajax-mail.js).
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        // Honeypot: the "website" field is hidden from real visitors, so anything
+        // in it came from a bot. Report success so the bot has nothing to retry.
+        if (!empty($_POST["website"])) {
+            http_response_code(200);
+            echo "Thank You! Your quote request has been sent.";
+            exit;
+        }
 
         // Every field the quote form submits, in the order it should appear in the email.
         $fields = array(
@@ -21,6 +29,7 @@
         );
 
         $name  = isset($_POST["name"]) ? strip_tags(trim($_POST["name"])) : "";
+        $name  = str_replace(array("\r", "\n", '"'), array(" ", " ", ""), $name);
         $email = isset($_POST["email"]) ? filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL) : "";
 
         if ($name === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -42,16 +51,19 @@
             }
         }
 
-        $message = isset($_POST["message"]) ? trim($_POST["message"]) : "";
+        $message = isset($_POST["message"]) ? strip_tags(trim($_POST["message"])) : "";
         if ($message !== "") {
             $email_content .= "\nMessage:\n$message\n";
         }
 
-        // Build the email headers.
-        $email_headers = "From: $name <$email>";
+        // Send from the site's own domain so the email passes SPF/DMARC checks;
+        // replying still goes straight to the visitor.
+        $email_headers  = "From: Oceanus Line Website <noreply@oceanuscontainer.com>\r\n";
+        $email_headers .= "Reply-To: \"$name\" <$email>\r\n";
+        $email_headers .= "Content-Type: text/plain; charset=UTF-8";
 
         // Send the email.
-        if (mail($recipient, "New Quote Request", $email_content, $email_headers)) {
+        if (mail($recipient, "New Quote Request", $email_content, $email_headers, "-fnoreply@oceanuscontainer.com")) {
             http_response_code(200);
             echo "Thank You! Your quote request has been sent.";
         } else {
