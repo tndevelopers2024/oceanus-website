@@ -1766,3 +1766,64 @@
 }
 
 
+
+/* ── Header: unified bar (opt-in via .header-unified) ──
+   Logo and nav share one glass pill instead of two separate capsules.
+   Add .header-unified to a page's <header> to enable it. */
+.header-1.header-unified .header-main {
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  border-radius: 60px !important;
+  box-shadow: 0 8px 32px rgba(3, 4, 94, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  padding: 8px 12px 8px 28px !important;
+  margin-top: 12px;
+  transition: all 0.3s ease;
+}
+
+.header-1.header-unified .header-main .logo {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+}
+
+.header-1.header-unified .header-main .logo img {
+  max-height: 60px !important;
+}
+
+.header-1.header-unified .header-right {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+}
+
+/* The pill already carries the glass, so drop the full-width sticky bar */
+.sticky.header-1.header-unified {
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+@media (max-width: 767px) {
+  .header-1.header-unified .header-main {
+    padding: 6px 8px 6px 18px !important;
+  }
+
+  .header-1.header-unified .header-main .logo img {
+    max-height: 44px !important;
+  }
+}
+
+/* Inner pages sit over dark banner photos, so the pill needs a more solid white */
+.header-1.header-inner.header-unified .header-main {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
