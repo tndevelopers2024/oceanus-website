@@ -1827,3 +1827,44 @@
 .header-1.header-inner.header-unified .header-main {
   background: rgba(255, 255, 255, 0.92) !important;
 }
+
+/* Service details side-by-side images: ensure equal dimensions and consistent aspect ratio */
+.service-details-wrapper .service-details-content .service-details-thumb-2 {
+  margin-top: 40px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.service-details-wrapper .service-details-content .service-details-thumb-2 img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 30px;
+  display: block;
+}
+
+/* Submenu dropdown width & text wrapping fix */
+.header-main .main-menu ul li .submenu,
+.header-1 .header-main .main-menu ul li .submenu,
+.header-2 .header-main .main-menu ul li .submenu,
+.header-3 .header-main .main-menu ul li .submenu {
+  min-width: 300px !important;
+  width: max-content !important;
+}
+
+.header-main .main-menu ul li .submenu li a,
+.header-1 .header-main .main-menu ul li .submenu li a,
+.header-2 .header-main .main-menu ul li .submenu li a,
+.header-3 .header-main .main-menu ul li .submenu li a {
+  white-space: nowrap !important;
+}
+
+.header-main .main-menu ul li .submenu li a::before,
+.header-1 .header-main .main-menu ul li .submenu li a::before,
+.header-2 .header-main .main-menu ul li .submenu li a::before,
+.header-3 .header-main .main-menu ul li .submenu li a::before {
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+}

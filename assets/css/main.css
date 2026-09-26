@@ -501,7 +501,7 @@ span {
   -webkit-transition-delay: 0.3s;
   background-color: #000000;
   opacity: 0.7;
-  cursor: url(../../assets/img/close.png), auto;
+  cursor: url(../../assets/img/ui/close-cursor.png), auto;
 }
 
 @media (max-width: 767px) {
@@ -1215,7 +1215,8 @@ span {
   position: absolute;
   top: 100%;
   inset-inline-start: 0;
-  min-width: 250px;
+  min-width: 300px;
+  width: max-content;
   background: var(--white);
   padding: 20px 0;
   border-radius: 10px;
@@ -1252,6 +1253,7 @@ span {
   align-items: center;
   justify-content: space-between;
   font-family: "Rethink Sans", sans-serif;
+  white-space: nowrap;
 }
 .header-main .main-menu ul li .submenu li a::before {
   content: "";
@@ -1260,7 +1262,8 @@ span {
   height: 2px;
   background: var(--theme);
   left: 14px;
-  bottom: 18px;
+  top: 50%;
+  transform: translateY(-50%);
   transition: all 0.4s ease-in-out;
 }
 .header-main .main-menu ul li .submenu li a:hover {
@@ -6647,11 +6650,16 @@ span {
 }
 .service-details-wrapper .service-details-content .service-details-thumb-2 {
   margin-top: 40px;
+  border-radius: 30px;
+  overflow: hidden;
 }
 .service-details-wrapper .service-details-content .service-details-thumb-2 img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
   border-radius: 30px;
+  display: block;
 }
 .service-details-wrapper .service-details-content .title-3 {
   font-size: 30px;

@@ -845,10 +845,16 @@
 
         .service-details-thumb-2 {
             margin-top: 40px;
+            border-radius: 30px;
+            overflow: hidden;
 
             img {
-                @include imgw;
+                width: 100%;
+                aspect-ratio: 4 / 3;
+                object-fit: cover;
+                object-position: center;
                 border-radius: 30px;
+                display: block;
             }
         }
 

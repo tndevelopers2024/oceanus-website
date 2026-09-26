@@ -24,7 +24,7 @@ foreach ($fileName in $targetFiles) {
     $content = $content -replace '<span>Need Our Services\?</span>', 'Let’s Build Something Great Together.'
     
     # 2. Update footer logo to full-color logo.png
-    $content = $content -replace '(?s)(<div class="footer-form">\s*<a href="index\.html" class="footer-logo">\s*<img src=")assets/img/logo/logo-white\.png(")', '$1assets/img/logo/logo.png$2'
+    $content = $content -replace '(?s)(<div class="footer-form">\s*<a href="index\.html" class="footer-logo">\s*<img src=")assets/img/logo/logo-white\.png(")', '$1assets/img/brand/oceanus-logo.png$2'
 
     # 3. Update 56 ports mentions in service pages
     $content = $content -replace '56 ports', '80+ ports'
