@@ -22,6 +22,7 @@ $(function () {
         form.prop('noValidate', true);
         function clear(field) {
             field.removeClass('input-error').removeAttr('aria-invalid aria-describedby').css('border', '');
+            field.closest('.iti').removeClass('input-error');
             form.find('#error-' + form.attr('id') + '-' + field.attr('name')).remove();
         }
         form.on('countrychange input change', 'input, textarea, select', function () { clear($(this)); });
@@ -41,11 +42,25 @@ $(function () {
                     error = this.type === 'checkbox' ? 'Please agree to continue.' : 'This field is required.';
                 } else if (value) {
                     if (iti) {
-                        if (!iti.isValidNumber()) {
-                            error = 'Please enter a valid phone number for the selected country.';
+                        var digits = value.replace(/\D/g, '');
+                        if (digits.length < 7 || digits.length > 15) {
+                            error = 'Please enter a valid phone number with 7–15 digits.';
                         } else {
-                            // Valid international number
-                            field.val(iti.getNumber());
+                            var formatted = '';
+                            try {
+                                formatted = iti.getNumber();
+                            } catch (e) {}
+                            if (!formatted || !formatted.startsWith('+')) {
+                                var countryData = iti.getSelectedCountryData();
+                                var dialCode = countryData && countryData.dialCode ? ('+' + countryData.dialCode) : '';
+                                var cleanVal = value.replace(/^\+/, '').trim();
+                                if (dialCode && !cleanVal.startsWith(countryData.dialCode)) {
+                                    formatted = dialCode + ' ' + cleanVal;
+                                } else {
+                                    formatted = '+' + cleanVal;
+                                }
+                            }
+                            field.val(formatted);
                         }
                     } else if (this.name === 'name' && !/^[\p{L}\p{M} .’'\-]{2,80}$/u.test(value)) {
                         error = 'Enter a name of 2–80 characters using letters and basic punctuation.';

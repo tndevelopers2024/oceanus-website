@@ -1870,6 +1870,18 @@
 }
 
 /* ── Intl Tel Input Pixel-Perfect Override Styles ── */
+:root {
+  --iti-path-flags-1x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/img/flags.png");
+  --iti-path-flags-2x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/img/flags@2x.png");
+  --iti-path-globe-1x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/img/globe.png");
+  --iti-path-globe-2x: url("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/img/globe@2x.png");
+}
+
+.iti__flag {
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: crisp-edges !important;
+}
+
 .iti {
   width: 100% !important;
   display: block !important;
@@ -1914,20 +1926,29 @@
   border-top-left-radius: 100px !important;
   border-bottom-left-radius: 100px !important;
   z-index: 3 !important;
+  background: transparent !important;
 }
 
-.iti__selected-country {
+.iti__country-container button,
+.iti__country-container .iti__selected-country,
+.iti__selected-country,
+.iti__selected-country-primary {
   border-top-left-radius: 100px !important;
   border-bottom-left-radius: 100px !important;
   padding: 0 10px 0 18px !important;
   background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
   display: flex !important;
   align-items: center !important;
   cursor: pointer !important;
 }
 
 .iti__selected-country:hover,
-.iti__selected-country:focus {
+.iti__selected-country:focus,
+.iti__country-container button:hover {
   background: rgba(0, 119, 182, 0.05) !important;
 }
 
