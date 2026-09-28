@@ -41,8 +41,8 @@
             exit;
         }
 
-        // Set the recipient email address.
-        $recipient = "info@oceanuscontainer.com";
+        $env = getEnvConfig();
+        $recipient = $env['MAIL_RECIPIENT'] ?? getenv('MAIL_RECIPIENT') ?: "info@oceanuscontainer.com";
 
         // Build the email content.
         $email_content = "";

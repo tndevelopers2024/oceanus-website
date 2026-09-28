@@ -1,3 +1,5 @@
+.env
+.env.local
 _audit_*.html
 .DS_Store
 **/.DS_Store
