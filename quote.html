@@ -226,7 +226,7 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Name*</p>
-                                                    <input type="text" name="name" placeholder="Your Name" required>
+                                                    <input type="text" name="name" placeholder="Your Name" required minlength="2" maxlength="80" pattern="^[a-zA-Z\s\.\'\-]+$" autocomplete="name">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
@@ -238,13 +238,13 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Email*</p>
-                                                    <input type="email" name="email" placeholder="Enter Your Email" required>
+                                                    <input type="email" name="email" placeholder="Enter Your Email" required autocomplete="email">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Phone Number*</p>
-                                                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                                                    <input type="tel" name="phone" placeholder="Phone Number" required pattern="^\+?[0-9\s\-()]{7,20}$" autocomplete="tel">
                                                 </div>
                                             </div>
                                         </div>
@@ -255,8 +255,8 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Service Required*</p>
-                                                    <select class="single-select w-100" name="service">
-                                                        <option>Please Select</option>
+                                                    <select class="single-select w-100" name="service" required>
+                                                        <option value="">Please Select</option>
                                                         <option>NVOCC</option>
                                                         <option>ISO Tank Operator</option>
                                                         <option>Freight Forwarding</option>
@@ -271,8 +271,8 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Cargo Type*</p>
-                                                    <select class="single-select w-100" name="cargo_type">
-                                                        <option>Please Select</option>
+                                                    <select class="single-select w-100" name="cargo_type" required>
+                                                        <option value="">Please Select</option>
                                                         <option>Food grade liquid</option>
                                                         <option>Hazardous liquid</option>
                                                         <option>Non-hazardous liquid</option>
@@ -286,7 +286,7 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Cargo / Product*</p>
-                                                    <input type="text" name="cargo" placeholder="e.g. Ethanol, base oil, latex" required>
+                                                    <input type="text" name="cargo" placeholder="e.g. Ethanol, base oil, latex" required minlength="2" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
@@ -298,20 +298,20 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Port of Loading*</p>
-                                                    <input type="text" name="pol" placeholder="e.g. Jebel Ali" required>
+                                                    <input type="text" name="pol" placeholder="e.g. Jebel Ali" required minlength="2" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Port of Discharge*</p>
-                                                    <input type="text" name="pod" placeholder="e.g. Singapore" required>
+                                                    <input type="text" name="pod" placeholder="e.g. Singapore" required minlength="2" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Equipment Required*</p>
-                                                    <select class="single-select w-100" name="equipment">
-                                                        <option>Please Select</option>
+                                                    <select class="single-select w-100" name="equipment" required>
+                                                        <option value="">Please Select</option>
                                                         <option>T11 ISO tank (26,000 ltr)</option>
                                                         <option>ISO tank – other capacity</option>
                                                         <option>20ft dry container</option>
@@ -324,7 +324,7 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Number of Units*</p>
-                                                    <input type="text" name="units" placeholder="e.g. 4 tanks" required>
+                                                    <input type="text" name="units" placeholder="e.g. 4 tanks" required minlength="1" maxlength="50">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
@@ -607,7 +607,7 @@
         <!--<< Wow Animation Js >>-->
         <script src="assets/js/wow.min.js"></script>
         <!--<< Ajax Mail Js >>-->
-        <script src="assets/js/ajax-mail.min.js?v=2"></script>
+        <script src="assets/js/ajax-mail.min.js?v=3"></script>
         <!--<< Main.js >>-->
         <script src="assets/js/main.min.js"></script>
     </body>
