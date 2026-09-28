@@ -1,151 +1,113 @@
-$(function() {
-    // Helper function to show error
-    function showError(field, message) {
-        field.addClass('input-error').css('border', '1px solid #dc3545');
-        var errorSpan = field.next('.error-text');
-        if (errorSpan.length === 0) {
-            field.after('<span class="error-text" style="color: #dc3545; font-size: 13px; display: block; margin-top: 5px; font-weight: 500;">' + message + '</span>');
-        } else {
-            errorSpan.text(message);
-        }
+$(function () {
+    // Initialize intlTelInput on tel inputs
+    if (window.intlTelInput) {
+        $('input[type="tel"]').each(function() {
+            var iti = window.intlTelInput(this, {
+                initialCountry: "ae",
+                preferredCountries: ["ae", "in", "sa", "om", "qa", "kw", "sg", "us", "gb"],
+                separateDialCode: true,
+                utilsScript: "assets/vendor/intl-tel-input/js/utils.js"
+            });
+            $(this).data('iti', iti);
+        });
     }
 
-    // Helper function to remove error
-    function removeError(field) {
-        field.removeClass('input-error').css('border', '');
-        if (field.next('.error-text').length) {
-            field.next('.error-text').remove();
+    $('#contact-form, #quote-form').each(function () {
+        var form = $(this), status = form.find('.form-message'), pending = false;
+        // Keep native dropdowns keyboard and mobile accessible.
+        form.find('select').each(function () {
+            if ($(this).next('.nice-select').length) $(this).niceSelect('destroy');
+            $(this).css({ display: 'block', width: '100%', minHeight: '54px' });
+        });
+        form.prop('noValidate', true);
+        function clear(field) {
+            field.removeClass('input-error').removeAttr('aria-invalid aria-describedby').css('border', '');
+            form.find('#error-' + form.attr('id') + '-' + field.attr('name')).remove();
         }
-    }
-
-    // Add input event listeners to clear error styling
-    $('form').on('input change', 'input, textarea, select', function() {
-        var field = $(this);
-        removeError(field);
-        
-        if (field.is(':checkbox')) {
-            removeError(field.parent());
-        }
-        
-        // Special handling for nice-select
-        if (field.is('select') && field.next('.nice-select').length) {
-            removeError(field.next('.nice-select'));
-        }
-    });
-
-    // Handle every AJAX-submitted form on the site (contact + quote).
-    $('#contact-form, #quote-form').each(function() {
-        var form = $(this);
-        var formMessages = form.find('.form-message');
-
-        form.submit(function(e) {
-            e.preventDefault();
-
-            var isValid = true;
-            var firstInvalidField = null;
-
-            // Clear previous errors
-            form.find('.error-text').remove();
-            form.find('.input-error').removeClass('input-error').css('border', '');
-
-            // Validate all required inputs, selects, and textareas
-            form.find('input[required], textarea[required], select[required]').each(function() {
-                var field = $(this);
-                var val = $.trim(field.val());
+        form.on('countrychange input change', 'input, textarea, select', function () { clear($(this)); });
+        form.on('submit', function (event) {
+            event.preventDefault();
+            if (pending) return;
+            var first = null;
+            status.removeClass('success error').text('');
+            form.find('input, textarea, select').not('[name="website"]').each(function () {
+                var field = $(this), value = $.trim(field.val()), error = '';
+                var iti = field.data('iti');
+                clear(field);
                 
-                if (field.is('select')) {
-                    // nice-select handling
-                    if (!val || val === '' || val === 'Please Select') {
-                        isValid = false;
-                        var niceSelect = field.next('.nice-select');
-                        if (niceSelect.length) {
-                            showError(niceSelect, 'Please select an option.');
-                            if (!firstInvalidField) firstInvalidField = niceSelect;
+                if (this.type !== 'checkbox') field.val(value);
+                
+                if (this.required && (this.type === 'checkbox' ? !this.checked : !value)) {
+                    error = this.type === 'checkbox' ? 'Please agree to continue.' : 'This field is required.';
+                } else if (value) {
+                    if (iti) {
+                        if (!iti.isValidNumber()) {
+                            error = 'Please enter a valid phone number for the selected country.';
                         } else {
-                            showError(field, 'Please select an option.');
-                            if (!firstInvalidField) firstInvalidField = field;
+                            // Valid international number
+                            field.val(iti.getNumber());
                         }
+                    } else if (this.name === 'name' && !/^[\p{L}\p{M} .’'\-]{2,80}$/u.test(value)) {
+                        error = 'Enter a name of 2–80 characters using letters and basic punctuation.';
+                    } else if (this.type === 'tel' && (!/^\+?[0-9 () .\-]{7,25}$/.test(value) || value.replace(/\D/g, '').length < 7 || value.replace(/\D/g, '').length > 15)) {
+                        error = 'Enter a phone number with 7–15 digits.';
+                    } else if (this.minLength > 0 && value.length < this.minLength) {
+                        error = 'Please enter at least ' + this.minLength + ' characters.';
+                    } else if (this.maxLength > 0 && value.length > this.maxLength) {
+                        error = 'Please enter no more than ' + this.maxLength + ' characters.';
+                    } else if (!this.checkValidity()) {
+                        error = this.validationMessage;
                     }
-                } else if (field.is(':checkbox')) {
-                    if (!field.is(':checked')) {
-                        isValid = false;
-                        showError(field.parent(), 'You must agree to continue.');
-                        if (!firstInvalidField) firstInvalidField = field;
-                    }
-                } else if (field.is('input[type="email"]')) {
-                    var emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-                    if (!val || !emailRegex.test(val)) {
-                        isValid = false;
-                        showError(field, 'Please enter a valid email address.');
-                        if (!firstInvalidField) firstInvalidField = field;
-                    }
-                } else if (field.is('input[type="tel"]') || field.attr('name') === 'phone') {
-                    var phoneRegex = /^\+?[0-9\s\-().]{7,25}$/;
-                    if (!val || !phoneRegex.test(val)) {
-                        isValid = false;
-                        showError(field, 'Please enter a valid phone number (at least 7 digits).');
-                        if (!firstInvalidField) firstInvalidField = field;
-                    }
-                } else {
-                    if (!this.checkValidity() || val === '') {
-                        isValid = false;
-                        showError(field, this.validationMessage || 'This field is required.');
-                        if (!firstInvalidField) firstInvalidField = field;
-                    }
+                }
+                
+                if (error) {
+                    var id = 'error-' + form.attr('id') + '-' + this.name;
+                    field.addClass('input-error').attr({ 'aria-invalid': 'true', 'aria-describedby': id }).css('border', '1px solid #dc3545');
+                    $('<span>').attr('id', id).addClass('error-text').css({ color: '#b42318', display: 'block', fontSize: '13px', marginTop: '5px' }).text(error).insertAfter(field.parent('.iti').length ? field.parent('.iti') : field);
+                    if (!first) first = this;
                 }
             });
-
-            if (!isValid) {
-                formMessages.removeClass('success').addClass('error').text('Please correct the highlighted fields and try again.');
-                if (firstInvalidField) {
-                    $('html, body').animate({
-                        scrollTop: firstInvalidField.offset().top - 120
-                    }, 400);
-                    firstInvalidField.focus();
-                }
+            
+            if (first) {
+                status.addClass('error').text('Please correct the highlighted fields and try again.');
+                first.focus();
                 return;
             }
-
-            var submitBtn = form.find('button[type="submit"]');
-            var originalBtnText = submitBtn.html();
-            submitBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Submitting...');
-
-            // Submit the form using AJAX.
-            $.ajax({
-                type: 'POST',
-                url: form.attr('action'),
-                data: form.serialize()
-            })
-            .done(function(response) {
-                formMessages.removeClass('error').addClass('success');
-                formMessages.text(response || 'Thank You! Your message has been sent.');
-
-                // Clear the form.
-                form.find('input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea').val('');
-                form.find('input[type="checkbox"]').prop('checked', false);
-                form.find('select').val('').prop('selectedIndex', 0).trigger('change');
-                
-                // Reset nice-select text to default placeholder
-                form.find('select').each(function() {
-                    var s = $(this);
-                    if (s.next('.nice-select').length) {
-                        s.next('.nice-select').find('.current').text('Please Select');
-                        s.next('.nice-select').removeClass('input-error').css('border', '');
-                        s.next('.nice-select').next('.error-text').remove();
+            
+            pending = true;
+            var button = form.find('button[type="submit"]'), original = button.html();
+            button.prop('disabled', true).text('Submitting…');
+            form.attr('aria-busy', 'true');
+            
+            $.ajax({ type: 'POST', url: form.attr('action'), data: form.serialize(), timeout: 45000, dataType: 'text' })
+                .done(function (response) {
+                    if (!/^Thank You!/.test(response.trim())) {
+                        status.addClass('error').text('We could not confirm delivery. Please contact info@oceanuscontainer.com.');
+                        return;
                     }
+                    status.addClass('success').text(response);
+                    form[0].reset();
+                    
+                    // Reset intlTelInput to default country and clear input
+                    form.find('input[type="tel"]').each(function() {
+                        var iti = $(this).data('iti');
+                        if (iti) {
+                            iti.setCountry("ae");
+                            $(this).val('');
+                        }
+                    });
+                })
+                .fail(function (xhr, reason) {
+                    var message = 'Your message could not be sent. Please try again or email info@oceanuscontainer.com.';
+                    if (reason === 'timeout') message = 'Delivery could not be confirmed. Please email info@oceanuscontainer.com before retrying.';
+                    else if ((xhr.status === 400 || xhr.status === 429) && xhr.responseText && !/[<>]/.test(xhr.responseText)) message = xhr.responseText;
+                    status.addClass('error').text(message);
+                })
+                .always(function () {
+                    pending = false;
+                    form.removeAttr('aria-busy');
+                    button.prop('disabled', false).html(original);
                 });
-            })
-            .fail(function(xhr) {
-                formMessages.removeClass('success').addClass('error');
-                if (xhr.responseText && xhr.responseText.trim() !== '') {
-                    formMessages.text(xhr.responseText.trim());
-                } else {
-                    formMessages.text('Oops! An error occurred and your message could not be sent.');
-                }
-            })
-            .always(function() {
-                submitBtn.prop('disabled', false).html(originalBtnText);
-            });
         });
     });
 });

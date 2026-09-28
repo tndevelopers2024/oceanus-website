@@ -1868,3 +1868,12 @@
   bottom: auto !important;
   transform: translateY(-50%) !important;
 }
+
+/* ── Intl Tel Input override styles ── */
+.iti { width: 100%; display: block; position: relative; }
+.iti__selected-country { border-top-left-radius: 100px; border-bottom-left-radius: 100px; padding: 0 10px 0 16px; background: transparent; }
+.iti__country-container { border-top-left-radius: 100px; border-bottom-left-radius: 100px; z-index: 3; }
+.iti input[type="tel"], .form-clt .iti input[type="tel"] { width: 100% !important; height: 52px !important; line-height: 52px !important; border-radius: 100px !important; border: 1px solid #D8DDE1; background: transparent; color: var(--text); font-size: 16px; font-family: inherit; text-transform: none !important; }
+.iti input[type="tel"]:focus, .form-clt .iti input[type="tel"]:focus { border-color: var(--theme, #0077B6); outline: none; }
+.iti.input-error input[type="tel"], .iti input[type="tel"].input-error { border-color: #dc3545 !important; }
+.iti__country-list { border-radius: 14px; box-shadow: 0 12px 36px rgba(0,0,0,0.16); border: 1px solid #D8DDE1; max-height: 240px; z-index: 1050; font-family: inherit; background: #ffffff; }

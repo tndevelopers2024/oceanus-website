@@ -64,6 +64,8 @@ function getMailer(): PHPMailer {
     $mail->SMTPSecure = ($smtpSecure === 'ssl') ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = $smtpPort;
     $mail->CharSet    = 'UTF-8';
+    $mail->Timeout    = 15;
+    $mail->getSMTPInstance()->Timelimit = 30;
 
     $mail->setFrom($fromEmail, $fromName);
 

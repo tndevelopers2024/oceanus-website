@@ -1,8 +1,11 @@
 <?php
+    header('Content-Type: text/plain; charset=UTF-8');
+    header('Cache-Control: no-store');
     define('OCEANUS_MAILER', true);
     require_once __DIR__ . '/mailer-config.php';
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        header("Allow: POST");
         http_response_code(405);
         echo "Method Not Allowed.";
         exit;
@@ -15,54 +18,15 @@
         exit;
     }
 
-    // Rate Limiting: 1 request every 10 seconds per IP, or 5 per hour.
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    require_once __DIR__ . '/lib/form-validation.php';
+    validate_request_fields();
     $ip = $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
-    $rate_limit_dir = sys_get_temp_dir() . '/oceanus_rate_limit';
-    if (!is_dir($rate_limit_dir)) {
-        @mkdir($rate_limit_dir, 0777, true);
-    }
-    $ip_hash = md5($ip);
-    $limit_file = $rate_limit_dir . '/' . $ip_hash . '.json';
-    
-    $now = time();
-    $requests = [];
-    if (file_exists($limit_file)) {
-        $data = json_decode(file_get_contents($limit_file), true);
-        if (is_array($data)) {
-            $requests = array_filter($data, function($t) use ($now) {
-                return ($now - $t) < 3600; // Keep last hour
-            });
-        }
-    }
-    
-    // Check 10 seconds cooldown
-    if (!empty($requests)) {
-        $last_request = end($requests);
-        if (($now - $last_request) < 10) {
-            http_response_code(429);
-            echo "Please wait 10 seconds before submitting again.";
-            exit;
-        }
-    }
-    
-    // Check 5 submissions per hour
-    if (count($requests) >= 5) {
-        http_response_code(429);
-        echo "Too many submissions. Please try again later.";
-        exit;
-    }
-    
-    $requests[] = $now;
-    file_put_contents($limit_file, json_encode(array_values($requests)));
 
     // Strict Field Validation
     // Name: sanitize, check length between 2 and 80 chars, must match regular expression
     $name = isset($_POST["name"]) ? trim($_POST["name"]) : "";
     $name = strip_tags(str_replace(["\r", "\n"], "", $name));
-    if (mb_strlen($name) < 2 || mb_strlen($name) > 80 || !preg_match('/^[a-zA-Z\s\.\'\-]+$/u', $name)) {
+    if (form_length($name) < 2 || form_length($name) > 80 || !preg_match('/^[\p{L}\p{M} .’\'\-]+$/u', $name)) {
         http_response_code(400);
         echo "Please provide a valid name (2-80 characters, letters and basic punctuation only).";
         exit;
@@ -78,7 +42,7 @@
 
     // Phone: validate with regex
     $phone = isset($_POST["phone"]) ? trim($_POST["phone"]) : "";
-    if ($phone !== "" && !preg_match('/^\+?[0-9\s\-().]{7,25}$/', $phone)) {
+    if (!valid_phone($phone)) {
         http_response_code(400);
         echo "Please provide a valid phone number.";
         exit;
@@ -100,13 +64,20 @@
         exit;
     }
 
+    if (($_POST['consent'] ?? '') !== '1') {
+        http_response_code(400);
+        exit('Please agree to the Terms & Conditions.');
+    }
+
     // Message: sanitize, check length
     $message = isset($_POST["message"]) ? strip_tags(trim($_POST["message"])) : "";
-    if (mb_strlen($message) < 10 || mb_strlen($message) > 3000) {
+    if (form_length($message) < 10 || form_length($message) > 3000) {
         http_response_code(400);
         echo "Please provide a message between 10 and 3000 characters.";
         exit;
     }
+
+    enforce_rate_limit();
 
     $env = getEnvConfig();
     $recipient = $env['MAIL_RECIPIENT'] ?? getenv('MAIL_RECIPIENT') ?: "info@oceanuscontainer.com";

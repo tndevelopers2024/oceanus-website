@@ -19,11 +19,15 @@
         <!-- ======== Page title ============ -->
         <title>Request A Quote – Oceanus Line &amp; Container Logistics LLC</title>
                 <!--<< Favicon >>-->
-        <link rel="shortcut icon" href="assets/img/brand/favicon.ico?v=2" type="image/x-icon">
-        <link rel="icon" type="image/svg+xml" href="assets/img/brand/favicon.svg?v=2">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32x32.png?v=2">
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/img/brand/favicon-16x16.png?v=2">
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/brand/apple-touch-icon.png?v=2">
+        <link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
+        <link rel="icon" href="assets/img/brand/favicon.ico?v=3" type="image/x-icon">
+        <link rel="icon" type="image/svg+xml" href="assets/img/brand/favicon.svg?v=3">
+        <link rel="icon" type="image/png" sizes="48x48" href="assets/img/brand/favicon-48x48.png?v=3">
+        <link rel="icon" type="image/png" sizes="96x96" href="assets/img/brand/favicon-96x96.png?v=3">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/img/brand/favicon-192x192.png?v=3">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32x32.png?v=3">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/img/brand/favicon-16x16.png?v=3">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/brand/apple-touch-icon.png?v=3">
         <!--<< Bootstrap min.css >>-->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <!--<< All Min Css >>-->
@@ -40,8 +44,10 @@
         <link rel="stylesheet" href="assets/css/nice-select.min.css">
         <!--<< Main.css >>-->
         <link rel="stylesheet" href="assets/css/main.min.css">
+        <!--<< Intl Tel Input >>-->
+        <link rel="stylesheet" href="assets/vendor/intl-tel-input/css/intlTelInput.min.css">
         <!--<< Oceanus Palette Override >>-->
-        <link rel="stylesheet" href="assets/css/palette-override.min.css?v=33">
+        <link rel="stylesheet" href="assets/css/palette-override.min.css?v=34">
     </head>
     <body>
 
@@ -226,25 +232,25 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Name*</p>
-                                                    <input type="text" name="name" placeholder="Your Name" required minlength="2" maxlength="80" pattern="^[a-zA-Z\s\.\'\-]+$" autocomplete="name">
+                                                    <input type="text" name="name" aria-label="Name" placeholder="Your Name" required minlength="2" maxlength="80" autocomplete="name">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Company</p>
-                                                    <input type="text" name="company" placeholder="Company Name">
+                                                    <input type="text" name="company" aria-label="Company" maxlength="150" placeholder="Company Name">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Email*</p>
-                                                    <input type="email" name="email" placeholder="Enter Your Email" required autocomplete="email">
+                                                    <input type="email" name="email" aria-label="Email" placeholder="Enter Your Email" maxlength="254" required autocomplete="email">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Phone Number*</p>
-                                                    <input type="tel" name="phone" placeholder="Phone Number" required pattern="^\+?[0-9\s\-()]{7,20}$" autocomplete="tel">
+                                                    <input type="tel" name="phone" aria-label="Phone number" placeholder="Phone Number" maxlength="25" required autocomplete="tel">
                                                 </div>
                                             </div>
                                         </div>
@@ -255,7 +261,7 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Service Required*</p>
-                                                    <select class="single-select w-100" name="service" required>
+                                                    <select class="single-select w-100" name="service" aria-label="Service" required>
                                                         <option value="">Please Select</option>
                                                         <option>NVOCC</option>
                                                         <option>ISO Tank Operator</option>
@@ -271,7 +277,7 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Cargo Type*</p>
-                                                    <select class="single-select w-100" name="cargo_type" required>
+                                                    <select class="single-select w-100" name="cargo_type" aria-label="Cargo type" required>
                                                         <option value="">Please Select</option>
                                                         <option>Food grade liquid</option>
                                                         <option>Hazardous liquid</option>
@@ -286,31 +292,31 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Cargo / Product*</p>
-                                                    <input type="text" name="cargo" placeholder="e.g. Ethanol, base oil, latex" required minlength="2" maxlength="100">
+                                                    <input type="text" name="cargo" aria-label="Cargo or product" placeholder="e.g. Ethanol, base oil, latex" required minlength="2" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>UN Number &amp; Class</p>
-                                                    <input type="text" name="un_number" placeholder="If hazardous – e.g. UN1170, Class 3">
+                                                    <input type="text" name="un_number" aria-label="UN number and class" maxlength="100" placeholder="If hazardous – e.g. UN1170, Class 3">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Port of Loading*</p>
-                                                    <input type="text" name="pol" placeholder="e.g. Jebel Ali" required minlength="2" maxlength="100">
+                                                    <input type="text" name="pol" aria-label="Port of loading" placeholder="e.g. Jebel Ali" required minlength="2" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Port of Discharge*</p>
-                                                    <input type="text" name="pod" placeholder="e.g. Singapore" required minlength="2" maxlength="100">
+                                                    <input type="text" name="pod" aria-label="Port of discharge" placeholder="e.g. Singapore" required minlength="2" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Equipment Required*</p>
-                                                    <select class="single-select w-100" name="equipment" required>
+                                                    <select class="single-select w-100" name="equipment" aria-label="Equipment" required>
                                                         <option value="">Please Select</option>
                                                         <option>T11 ISO tank (26,000 ltr)</option>
                                                         <option>ISO tank – other capacity</option>
@@ -324,19 +330,19 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Number of Units*</p>
-                                                    <input type="text" name="units" placeholder="e.g. 4 tanks" required minlength="1" maxlength="50">
+                                                    <input type="text" name="units" aria-label="Number of units" placeholder="e.g. 4 tanks" required minlength="1" maxlength="50">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Target Shipment Date</p>
-                                                    <input type="date" name="ship_date" placeholder="Select a date">
+                                                    <input type="date" name="ship_date" aria-label="Shipment date" placeholder="Select a date">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-clt">
                                                     <p>Estimated Volume / Weight</p>
-                                                    <input type="text" name="volume" placeholder="e.g. 24,000 ltr / 21 MT">
+                                                    <input type="text" name="volume" aria-label="Volume or weight" maxlength="150" placeholder="e.g. 24,000 ltr / 21 MT">
                                                 </div>
                                             </div>
                                         </div>
@@ -363,7 +369,7 @@
                                         <div class="form-items">
                                             <span>Message (Optional)</span>
                                             <div class="form-clt">
-                                                <textarea name="message" placeholder="Anything else we should know about the cargo or the schedule..."></textarea>
+                                                <textarea name="message" aria-label="Message" maxlength="3000" placeholder="Anything else we should know about the cargo or the schedule..."></textarea>
                                             </div>
                                             <div class="bottom-itemss">
                                                 <div class="icon">
@@ -465,15 +471,8 @@
                                             <a href="index.html" class="footer-logo">
                                                 <img src="assets/img/brand/oceanus-logo.png" alt="Oceanus Line Logo" style="max-height: 75px; max-width: 240px; width: auto; height: auto; object-fit: contain;">
                                             </a>
-                                            <form action="#">
-                                                <div class="form-clt">
-                                                    <input type="text" name="email" placeholder="Email Address">
-                                                    <button class="theme-btn theme-btn-3">
-                                                        Subscribe
-                                                    </button>
-                                                </div>
-                                            </form>
-                                            <p>You agree to the privacy statement by subscribing.</p>
+                                            <p>Speak with our team about your next shipment.</p>
+                                            <a href="contact.html" class="theme-btn theme-btn-3">Contact Our Team</a>
                                             <div class="social-icon d-flex align-items-center">
                                             <a href="https://wa.me/97142636272" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                                             <a href="mailto:info@oceanuscontainer.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
@@ -606,10 +605,10 @@
         <script src="assets/js/jquery.magnific-popup.min.js"></script>
         <!--<< Wow Animation Js >>-->
         <script src="assets/js/wow.min.js"></script>
-        <!--<< Ajax Mail Js >>-->
-        <script src="assets/js/ajax-mail.min.js?v=3"></script>
         <!--<< Main.js >>-->
         <script src="assets/js/main.min.js"></script>
+        <script src="assets/vendor/intl-tel-input/js/intlTelInput.min.js"></script>
+        <script src="assets/js/ajax-mail.min.js?v=4"></script>
     </body>
 </html>
 

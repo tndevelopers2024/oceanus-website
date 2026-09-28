@@ -1,8 +1,11 @@
 <?php
+    header('Content-Type: text/plain; charset=UTF-8');
+    header('Cache-Control: no-store');
     define('OCEANUS_MAILER', true);
     require_once __DIR__ . '/mailer-config.php';
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        header("Allow: POST");
         http_response_code(405);
         echo "Method Not Allowed.";
         exit;
@@ -14,46 +17,9 @@
         exit;
     }
 
-    // Rate Limiting
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    require_once __DIR__ . '/lib/form-validation.php';
+    validate_request_fields();
     $ip = $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
-    $rate_limit_dir = sys_get_temp_dir() . '/oceanus_rate_limit';
-    if (!is_dir($rate_limit_dir)) {
-        @mkdir($rate_limit_dir, 0777, true);
-    }
-    $ip_hash = md5($ip . '_quote');
-    $limit_file = $rate_limit_dir . '/' . $ip_hash . '.json';
-    
-    $now = time();
-    $requests = [];
-    if (file_exists($limit_file)) {
-        $data = json_decode(file_get_contents($limit_file), true);
-        if (is_array($data)) {
-            $requests = array_filter($data, function($t) use ($now) {
-                return ($now - $t) < 3600;
-            });
-        }
-    }
-    
-    if (!empty($requests)) {
-        $last_request = end($requests);
-        if (($now - $last_request) < 10) {
-            http_response_code(429);
-            echo "Please wait 10 seconds before submitting again.";
-            exit;
-        }
-    }
-    
-    if (count($requests) >= 5) {
-        http_response_code(429);
-        echo "Too many submissions. Please try again later.";
-        exit;
-    }
-    
-    $requests[] = $now;
-    file_put_contents($limit_file, json_encode(array_values($requests)));
 
     // Helper for fields
     function get_post($key) {
@@ -62,7 +28,7 @@
 
     // 1. Name
     $name = strip_tags(str_replace(["\r", "\n"], "", get_post("name")));
-    if (mb_strlen($name) < 2 || mb_strlen($name) > 80 || !preg_match('/^[a-zA-Z\s\.\'\-]+$/u', $name)) {
+    if (form_length($name) < 2 || form_length($name) > 80 || !preg_match('/^[\p{L}\p{M} .’\'\-]+$/u', $name)) {
         http_response_code(400);
         echo "Please provide a valid name (2-80 characters, letters and basic punctuation only).";
         exit;
@@ -78,7 +44,7 @@
 
     // 3. Phone
     $phone = get_post("phone");
-    if (!preg_match('/^\+?[0-9\s\-().]{7,25}$/', $phone)) {
+    if (!valid_phone($phone)) {
         http_response_code(400);
         echo "Please provide a valid phone number.";
         exit;
@@ -114,7 +80,7 @@
 
     // 6. Cargo / Product
     $cargo = get_post("cargo");
-    if (mb_strlen($cargo) < 2 || mb_strlen($cargo) > 150) {
+    if (form_length($cargo) < 2 || form_length($cargo) > 150) {
         http_response_code(400);
         echo "Please provide a valid cargo/product description (2-150 characters).";
         exit;
@@ -122,7 +88,7 @@
 
     // 7. Port of Loading (pol)
     $pol = get_post("pol");
-    if (mb_strlen($pol) < 2 || mb_strlen($pol) > 100) {
+    if (form_length($pol) < 2 || form_length($pol) > 100) {
         http_response_code(400);
         echo "Please provide a valid Port of Loading (2-100 characters).";
         exit;
@@ -130,7 +96,7 @@
 
     // 8. Port of Discharge (pod)
     $pod = get_post("pod");
-    if (mb_strlen($pod) < 2 || mb_strlen($pod) > 100) {
+    if (form_length($pod) < 2 || form_length($pod) > 100) {
         http_response_code(400);
         echo "Please provide a valid Port of Discharge (2-100 characters).";
         exit;
@@ -156,6 +122,25 @@
     $ship_date = strip_tags(get_post("ship_date"));
     $volume = strip_tags(get_post("volume"));
     $message = strip_tags(get_post("message"));
+
+    foreach (['company' => 150, 'un_number' => 100, 'units' => 50, 'volume' => 150, 'message' => 3000] as $field => $maximum) {
+        if (form_length($$field) > $maximum) {
+            http_response_code(400);
+            exit('Please shorten the ' . str_replace('_', ' ', $field) . ' field.');
+        }
+    }
+    if ($units === '') {
+        http_response_code(400);
+        exit('Please enter the number of units.');
+    }
+    if ($ship_date !== '') {
+        $date = DateTime::createFromFormat('!Y-m-d', $ship_date);
+        if (!$date || $date->format('Y-m-d') !== $ship_date) {
+            http_response_code(400);
+            exit('Please provide a valid shipment date.');
+        }
+    }
+    enforce_rate_limit();
 
     $env = getEnvConfig();
     $recipient = $env['MAIL_RECIPIENT'] ?? getenv('MAIL_RECIPIENT') ?: "info@oceanuscontainer.com";
