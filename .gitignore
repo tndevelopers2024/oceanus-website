@@ -1,3 +1,4 @@
 _audit_*.html
 .DS_Store
+**/.DS_Store
 Thumbs.db

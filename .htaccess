@@ -19,8 +19,8 @@ ErrorDocument 404 /404.html
   # Block dotfiles and folders (.git, .gitignore, .DS_Store), except .well-known (SSL validation)
   RewriteRule (^|/)\.(?!well-known/) - [F]
 
-  # Block development-only folders
-  RewriteRule ^(scratch|assets/scss)(/|$) - [F]
+  # Block development-only and internal config folders/files
+  RewriteRule ^(scratch|assets/scss|lib|mailer-config\.php)(/|$) - [F]
 </IfModule>
 
 <IfModule mod_headers.c>

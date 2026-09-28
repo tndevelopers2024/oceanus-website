@@ -1,4 +1,7 @@
 <?php
+    define('OCEANUS_MAILER', true);
+    require_once __DIR__ . '/mailer-config.php';
+
     // Handles the contact form on contact.html (submitted by assets/js/ajax-mail.js).
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -40,18 +43,19 @@
         }
         $email_content .= "\nMessage:\n$message\n";
 
-        // Send from the site's own domain so the email passes SPF/DMARC checks;
-        // replying still goes straight to the visitor.
-        $email_headers  = "From: Oceanus Line Website <noreply@oceanuscontainer.com>\r\n";
-        $email_headers .= "Reply-To: \"$name\" <$email>\r\n";
-        $email_headers .= "Content-Type: text/plain; charset=UTF-8";
+        try {
+            $mail = getMailer();
+            $mail->addAddress($recipient);
+            $mail->addReplyTo($email, $name);
+            $mail->Subject = "New Website Enquiry from $name";
+            $mail->Body    = $email_content;
+            $mail->send();
 
-        // Send the email.
-        if (mail($recipient, "New Website Enquiry", $email_content, $email_headers, "-fnoreply@oceanuscontainer.com")) {
             http_response_code(200);
             echo "Thank You! Your message has been sent.";
-        } else {
+        } catch (\Exception $e) {
             http_response_code(500);
+            error_log("Mail Error: " . $e->getMessage());
             echo "Oops! Something went wrong and we couldn't send your message.";
         }
 
