@@ -1869,11 +1869,163 @@
   transform: translateY(-50%) !important;
 }
 
-/* ── Intl Tel Input override styles ── */
-.iti { width: 100%; display: block; position: relative; }
-.iti__selected-country { border-top-left-radius: 100px; border-bottom-left-radius: 100px; padding: 0 10px 0 16px; background: transparent; }
-.iti__country-container { border-top-left-radius: 100px; border-bottom-left-radius: 100px; z-index: 3; }
-.iti input[type="tel"], .form-clt .iti input[type="tel"] { width: 100% !important; height: 52px !important; line-height: 52px !important; border-radius: 100px !important; border: 1px solid #D8DDE1; background: transparent; color: var(--text); font-size: 16px; font-family: inherit; text-transform: none !important; }
-.iti input[type="tel"]:focus, .form-clt .iti input[type="tel"]:focus { border-color: var(--theme, #0077B6); outline: none; }
-.iti.input-error input[type="tel"], .iti input[type="tel"].input-error { border-color: #dc3545 !important; }
-.iti__country-list { border-radius: 14px; box-shadow: 0 12px 36px rgba(0,0,0,0.16); border: 1px solid #D8DDE1; max-height: 240px; z-index: 1050; font-family: inherit; background: #ffffff; }
+/* ── Intl Tel Input Pixel-Perfect Override Styles ── */
+.iti {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+}
+
+/* Ensure the main telephone input matches the Oceanus pill design */
+.iti input[type="tel"],
+.form-clt .iti input[type="tel"],
+.quote-wrapper .quote-form-items .form-clt .iti input[type="tel"],
+.contact-form-box-in .form-clt .iti input[type="tel"] {
+  width: 100% !important;
+  height: 54px !important;
+  line-height: 54px !important;
+  border-radius: 100px !important;
+  border: 1px solid #D8DDE1 !important;
+  background: transparent !important;
+  color: var(--text, #333333) !important;
+  font-size: 16px !important;
+  font-family: inherit !important;
+  text-transform: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  display: block !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.iti input[type="tel"]:focus,
+.form-clt .iti input[type="tel"]:focus,
+.quote-wrapper .quote-form-items .form-clt .iti input[type="tel"]:focus,
+.contact-form-box-in .form-clt .iti input[type="tel"]:focus {
+  border-color: var(--theme, #0077B6) !important;
+}
+
+.iti.input-error input[type="tel"],
+.iti input[type="tel"].input-error {
+  border-color: #dc3545 !important;
+}
+
+/* Flag & dial code trigger inside the left of the pill */
+.iti__country-container {
+  border-top-left-radius: 100px !important;
+  border-bottom-left-radius: 100px !important;
+  z-index: 3 !important;
+}
+
+.iti__selected-country {
+  border-top-left-radius: 100px !important;
+  border-bottom-left-radius: 100px !important;
+  padding: 0 10px 0 18px !important;
+  background: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+}
+
+.iti__selected-country:hover,
+.iti__selected-country:focus {
+  background: rgba(0, 119, 182, 0.05) !important;
+}
+
+.iti__selected-dial-code {
+  font-family: inherit !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: var(--text, #333333) !important;
+  margin-left: 4px !important;
+}
+
+/* Dropdown Container */
+.iti__dropdown-content {
+  border-radius: 14px !important;
+  box-shadow: 0 12px 36px rgba(3, 4, 94, 0.16) !important;
+  border: 1px solid #D8DDE1 !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
+  z-index: 1050 !important;
+  margin-top: 6px !important;
+  width: 340px !important;
+  max-width: 90vw !important;
+}
+
+/* FIX: Search Input inside the dropdown (strictly reset .form-clt input inheritance) */
+.form-clt .iti .iti__search-input,
+.quote-wrapper .quote-form-items .form-clt .iti .iti__search-input,
+.contact-form-box-in .form-clt .iti .iti__search-input,
+.iti__search-input {
+  width: calc(100% - 16px) !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  margin: 8px 8px 6px 8px !important;
+  padding: 0 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid #D8DDE1 !important;
+  background: #f8fafc !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  color: #1e293b !important;
+  outline: none !important;
+  box-shadow: none !important;
+  display: block !important;
+  text-transform: none !important;
+}
+
+.form-clt .iti .iti__search-input:focus,
+.quote-wrapper .quote-form-items .form-clt .iti .iti__search-input:focus,
+.contact-form-box-in .form-clt .iti .iti__search-input:focus,
+.iti__search-input:focus {
+  border-color: var(--theme, #0077B6) !important;
+  background: #ffffff !important;
+}
+
+.form-clt .iti .iti__search-input::placeholder,
+.iti__search-input::placeholder {
+  color: #94a3b8 !important;
+  font-size: 14px !important;
+}
+
+/* Country List UL */
+.iti__country-list {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  max-height: 220px !important;
+  overflow-y: auto !important;
+  margin: 0 !important;
+  padding: 4px 0 !important;
+  list-style: none !important;
+  background: #ffffff !important;
+}
+
+.iti__country {
+  padding: 8px 14px !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #1a1a1a !important;
+  cursor: pointer !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.iti__country:hover,
+.iti__country.iti__highlight {
+  background-color: rgba(0, 119, 182, 0.08) !important;
+  color: var(--theme, #0077B6) !important;
+}
+
+.iti__country-name {
+  font-size: 14px !important;
+  color: inherit !important;
+}
+
+.iti__dial-code {
+  font-size: 13px !important;
+  color: #64748b !important;
+  margin-left: auto !important;
+}
+
