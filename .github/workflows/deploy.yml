@@ -1,4 +1,4 @@
-name: Deploy Website to Hostinger
+name: Deploy Website to Hostinger via SSH
 
 on:
   push:
@@ -7,26 +7,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  web-deploy:
+  deploy:
     name: Sync to Hostinger
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
-      - name: Sync Changed Files to Hostinger
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: public_html/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.env*
-            **/scratch/**
-            **/.DS_Store
-            **/README.md
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+      - name: Sync Files to Hostinger via Rsync
+        run: |
+          rsync -avz \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
+            --exclude '.git*' \
+            --exclude '.env*' \
+            --exclude 'scratch/' \
+            --exclude '.DS_Store' \
+            --exclude 'README.md' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:public_html/
