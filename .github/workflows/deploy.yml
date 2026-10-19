@@ -29,4 +29,4 @@ jobs:
             --exclude 'scratch/' \
             --exclude '.DS_Store' \
             --exclude 'README.md' \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:public_html/
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:domains/oceanuscontainer.com/public_html/
